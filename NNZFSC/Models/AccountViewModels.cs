@@ -79,6 +79,10 @@ namespace NNZFSC.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Full Name")]
+        public string UserName { get; set; }
     }
 
     public class ResetPasswordViewModel
