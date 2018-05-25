@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NNZFSC", "NNZFSC\NNZFSC.csproj", "{D0CC29CD-A82A-4052-BF91-94C375B6967C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NNZFSC.Tests", "NNZFSC.Tests\NNZFSC.Tests.csproj", "{88BA873C-5893-4D2D-8272-132EE1BA8E19}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0CC29CD-A82A-4052-BF91-94C375B6967C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0CC29CD-A82A-4052-BF91-94C375B6967C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0CC29CD-A82A-4052-BF91-94C375B6967C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0CC29CD-A82A-4052-BF91-94C375B6967C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88BA873C-5893-4D2D-8272-132EE1BA8E19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88BA873C-5893-4D2D-8272-132EE1BA8E19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88BA873C-5893-4D2D-8272-132EE1BA8E19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88BA873C-5893-4D2D-8272-132EE1BA8E19}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
