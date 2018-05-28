@@ -18,10 +18,23 @@
     <div class="panel">
 
         <div class="panel-body">
+            <div class="col-md-3 dashboard-icon col-sm-3  row text-center">
+               
+               <span class="glyphicon glyphicon-user"></span> 
+                <div>@Html.ActionLink("Register Member", "Register", "Register") </div>
+              
+            </div>
+            <div class="col-md-3  dashboard-icon col-sm-3  row text-center">
+                <span class="glyphicon glyphicon-list"></span>
+              <div>@Html.ActionLink("Member Listing", "MemberDetails", "Member") </div>
+            </div>
 
+            <div class="col-md-3 dashboard-icon col-sm-3  row text-center">
+                <span class="glyphicon glyphicon-calendar"></span>
+               <div>@Html.ActionLink("Renew Member","RenewMember","Renew") </div>
 
-
-
+            </div>
+         
         </div>
 
     </div>
