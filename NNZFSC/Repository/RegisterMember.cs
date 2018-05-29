@@ -12,17 +12,19 @@ namespace NNZFSC.Repository
     public class RegisterMember :IRegisterMember
     {
 
+        string connection = ConfigurationManager.ConnectionStrings["connection"].ToString();
         public int InsertMember(MemberRegistration member)
 
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["connection"].ToString()))
+                using (SqlConnection con = new SqlConnection(connection))
                 {
 
                     SqlCommand cmd = new SqlCommand("sp_AddMember", con);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@FirstName", member.MemberFirstName);
+                    cmd.Parameters.AddWithValue("@MemberFirstName", member.MemberFirstName);
+                    if (string.IsNullOrEmpty(member.MemberMiddleName)) { member.MemberMiddleName =""; }
                     cmd.Parameters.AddWithValue("@MemberMiddleName", member.MemberMiddleName);
                     cmd.Parameters.AddWithValue("@MemberLastName", member.MemberLastName);
                     cmd.Parameters.AddWithValue("@MemberAddress", member.MemberAddress);
@@ -30,11 +32,14 @@ namespace NNZFSC.Repository
                     cmd.Parameters.AddWithValue("@MembershipAmount", member.MembershipAmount);
                     cmd.Parameters.AddWithValue("@MembershipDate", member.MembershipDate);
                     cmd.Parameters.AddWithValue("@MembershipExpiryDate", member.MembershipExpiryDate);
-                    cmd.Parameters.AddWithValue("@MemberImageName", member.MemberImageName);
-                    cmd.Parameters.AddWithValue("@MemberImagePath", member.MemberImagePath);
+                    if (string.IsNullOrEmpty(member.MemberImageName)) { member.MemberImageName =""; }
+                     cmd.Parameters.AddWithValue("@MemberImageName", member.MemberImageName); 
+                    if (string.IsNullOrEmpty(member.MemberImagePath)) { member.MemberImagePath =""; }
+                    cmd.Parameters.AddWithValue("@MemberImagePath", member.MemberImagePath); 
+                    cmd.Parameters.AddWithValue("@CreateBy", member.CreateBy);
                     con.Open();
-                    //  int id = cmd.ExecuteNonQuery();
-                    int insertedID = Convert.ToInt32(cmd.ExecuteScalar());
+                    
+                    int insertedID = Convert.ToInt32(cmd.ExecuteNonQuery());
                     con.Close();
                     return insertedID;
 
@@ -43,9 +48,9 @@ namespace NNZFSC.Repository
 
             }
 
-            catch
+            catch(Exception ex)
             {
-                throw new Exception("Eror in inserting Member");
+                throw ex;
 
             }
 
@@ -59,7 +64,7 @@ namespace NNZFSC.Repository
             try
             {
 
-                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["connection"].ToString()))
+                using (SqlConnection con = new SqlConnection(connection))
                 {
 
                     SqlCommand cmd = new SqlCommand("sp_UpdateMember", con);
@@ -75,6 +80,7 @@ namespace NNZFSC.Repository
                     cmd.Parameters.AddWithValue("@MembershipExpiryDate", member.MembershipExpiryDate);
                     cmd.Parameters.AddWithValue("@MemberImageName", member.MemberImageName);
                     cmd.Parameters.AddWithValue("@MemberImagePath", member.MemberImagePath);
+                    cmd.Parameters.AddWithValue("@CreatedBy", member.CreateBy);
                     con.Open();
                     //  int id = cmd.ExecuteNonQuery();
                     int insertedID = Convert.ToInt32(cmd.ExecuteScalar());
@@ -93,9 +99,20 @@ namespace NNZFSC.Repository
 
         }
 
-        public void  DeleteMember()
+        public void  DeleteMember(int ? id)
         {
 
+            using (SqlConnection con = new SqlConnection(connection))
+            {
+
+                SqlCommand cmd = new SqlCommand("sp_DeleteMember",con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@MemberID", id);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
         }
 
 
@@ -104,5 +121,7 @@ namespace NNZFSC.Repository
 
         }
 
+
+        
     }
 }

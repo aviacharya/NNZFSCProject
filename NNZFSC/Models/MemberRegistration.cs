@@ -31,7 +31,7 @@ namespace NNZFSC.Models
 
         [Display(Name = "Amount")]
         [Required(ErrorMessage = "Please enter the Membership Fee")]
-        public int MembershipAmount { get; set; }
+        public int? MembershipAmount { get; set; }
 
         [Display(Name = "Membership Date")]
         [Required(ErrorMessage = "Please enter the Membership Date")]
@@ -42,8 +42,10 @@ namespace NNZFSC.Models
         public DateTime ? MembershipExpiryDate { get; set; }
 
 
-        public string MemberImageName { get; set; }
+        public string  MemberImageName { get; set; }
 
-        public string MemberImagePath { get; set; }
+        public string  MemberImagePath { get; set; }
+
+        public string CreateBy { get; set; }
     }
 }

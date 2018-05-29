@@ -15,6 +15,6 @@ namespace NNZFSC.Repository
 
         void DisplayMember();
 
-        void DeleteMember();
+        void DeleteMember(int ? id);
     }
 }
