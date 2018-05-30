@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NNZFSC.Models;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace NNZFSC.Repository
 {
@@ -13,7 +15,7 @@ namespace NNZFSC.Repository
 
         int UpdateMember(MemberRegistration member);
 
-        void DisplayMember();
+        IEnumerable<MemberRegistration> AllMemberDetails();
 
         void DeleteMember(int ? id);
     }

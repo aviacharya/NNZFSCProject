@@ -116,9 +116,41 @@ namespace NNZFSC.Repository
         }
 
 
-        public void DisplayMember()
-        {
+        public IEnumerable<MemberRegistration> AllMemberDetails()
+         {
+            
+            SqlDataReader dr;
+            List<MemberRegistration> MemberList = new List<MemberRegistration>();
+            
+            using (SqlConnection con = new SqlConnection(connection))
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("select * from Tbl_Member", con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dr = cmd.ExecuteReader();
+                              
+               while(dr.Read())
+                {
+                    MemberRegistration member = new MemberRegistration();
+                    member.MemberId = Convert.ToInt32(dr["MemberId"]);
+                    member.MemberFirstName = dr["MemberFirstName"].ToString();
+                    member.MemberMiddleName = dr["MemberMiddleName"].ToString();
+                    member.MemberLastName = dr["MemberLastName"].ToString();
+                    member.MemberAddress = dr["MemberAddress"].ToString();
+                    member.EmailAddress = dr["EmailAddress"].ToString();
+                    member.MembershipAmount = Convert.ToInt32(dr["MembershipAmount"]);
+                    member.MembershipDate = Convert.ToDateTime(dr["MembershipDate"].ToString());
+                    member.MembershipExpiryDate = Convert.ToDateTime(dr["MembershipExpiryDate"].ToString());
+                    member.MemberImageName = dr["MemberImageName"].ToString();
+                    member.MemberImagePath = dr["MemberImagePath"].ToString();
+                    member.CreateBy = dr["CreateBy"].ToString();
 
+                    MemberList.Add(member);
+                    
+                }
+                con.Close();
+            }
+            return MemberList;
         }
 
 

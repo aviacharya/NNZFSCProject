@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using NNZFSC.Models;
 using NNZFSC.Repository;
+using System.Data;
 
 namespace NNZFSC.Controllers
 {
@@ -21,7 +22,9 @@ namespace NNZFSC.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            List<MemberRegistration> member = new List<MemberRegistration>();
+            member= objRegisterMember.AllMemberDetails().ToList();
+            return View(member);
         }
 
 

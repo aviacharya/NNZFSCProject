@@ -1,0 +1,107 @@
+﻿@model NNZFSC.Models.MemberRegistration
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Member Registration</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberMiddleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberMiddleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MembershipAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MembershipAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MembershipDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MembershipDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MembershipExpiryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MembershipExpiryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberImageName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberImageName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberImagePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberImagePath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MemberId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

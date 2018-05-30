@@ -1,0 +1,98 @@
+﻿@model IEnumerable<NNZFSC.Models.MemberRegistration>
+
+@{
+    ViewBag.Title = "NNZFSC Members";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>NNZFSC Members</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="container-fluid">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberMiddleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MembershipAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MembershipDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MembershipExpiryDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberImageName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberImagePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateBy)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberMiddleName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MembershipAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MembershipDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MembershipExpiryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberImageName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberImagePath)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateBy)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MemberId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MemberId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MemberId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
