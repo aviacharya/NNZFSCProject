@@ -70,32 +70,77 @@ namespace NNZFSC.Repository
                     SqlCommand cmd = new SqlCommand("sp_UpdateMember", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@MemberId", member.MemberId);
-                    cmd.Parameters.AddWithValue("@FirstName", member.MemberFirstName);
-                    cmd.Parameters.AddWithValue("@MemberMiddleName", member.MemberMiddleName);
+                    cmd.Parameters.AddWithValue("@MemberFirstName", member.MemberFirstName);
+                    if (string.IsNullOrEmpty(member.MemberMiddleName)) { member.MemberMiddleName = ""; }
+                     cmd.Parameters.AddWithValue("@MemberMiddleName", member.MemberMiddleName);
                     cmd.Parameters.AddWithValue("@MemberLastName", member.MemberLastName);
                     cmd.Parameters.AddWithValue("@MemberAddress", member.MemberAddress);
                     cmd.Parameters.AddWithValue("@EmailAddress", member.EmailAddress);
                     cmd.Parameters.AddWithValue("@MembershipAmount", member.MembershipAmount);
                     cmd.Parameters.AddWithValue("@MembershipDate", member.MembershipDate);
                     cmd.Parameters.AddWithValue("@MembershipExpiryDate", member.MembershipExpiryDate);
-                    cmd.Parameters.AddWithValue("@MemberImageName", member.MemberImageName);
-                    cmd.Parameters.AddWithValue("@MemberImagePath", member.MemberImagePath);
-                    cmd.Parameters.AddWithValue("@CreatedBy", member.CreateBy);
+                    if (string.IsNullOrEmpty(member.MemberImageName)) { member.MemberImageName = ""; }
+                     cmd.Parameters.AddWithValue("@MemberImageName", member.MemberImageName);
+                    if (string.IsNullOrEmpty(member.MemberImagePath)) { member.MemberImagePath = ""; }
+                      cmd.Parameters.AddWithValue("@MemberImagePath", member.MemberImagePath);
+                    cmd.Parameters.AddWithValue("@CreateBy", member.CreateBy);
                     con.Open();
                     //  int id = cmd.ExecuteNonQuery();
-                    int insertedID = Convert.ToInt32(cmd.ExecuteScalar());
+                    int insertedID = Convert.ToInt32(cmd.ExecuteNonQuery());
                     con.Close();
                     return insertedID;
 
                 }
             }
 
-            catch
+            catch(Exception ex)
             {
-                throw new Exception("Eror in Updating Member");
+                throw ex;
 
             }
             
+
+        }
+
+
+        public MemberRegistration GetMemberById(int id)
+        {
+            try
+            {
+                SqlDataReader dr;
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("select * from Tbl_Member where MemberId="+ id +" ", con);
+                    dr = cmd.ExecuteReader();
+                    MemberRegistration member = new MemberRegistration();
+                    while (dr.Read())
+                    {
+                      
+                        member.MemberId = Convert.ToInt32(dr["MemberId"]);
+                        member.MemberFirstName = dr["MemberFirstName"].ToString();
+                        member.MemberMiddleName = dr["MemberMiddleName"].ToString();
+                        member.MemberLastName = dr["MemberLastName"].ToString();
+                        member.MemberAddress = dr["MemberAddress"].ToString();
+                        member.EmailAddress = dr["EmailAddress"].ToString();
+                        member.MembershipAmount = Convert.ToInt32(dr["MembershipAmount"]);
+                        member.MembershipDate = Convert.ToDateTime(dr["MembershipDate"].ToString());
+                        member.MembershipExpiryDate = Convert.ToDateTime(dr["MembershipExpiryDate"].ToString());
+                        member.MemberImageName = dr["MemberImageName"].ToString();
+                        member.MemberImagePath = dr["MemberImagePath"].ToString();
+                        member.CreateBy = dr["CreateBy"].ToString();
+                        
+                    }
+                    return member;
+                }
+               
+            }
+
+            catch(Exception e)
+            {
+                throw e;
+            }
 
         }
 
@@ -118,39 +163,46 @@ namespace NNZFSC.Repository
 
         public IEnumerable<MemberRegistration> AllMemberDetails()
          {
-            
-            SqlDataReader dr;
-            List<MemberRegistration> MemberList = new List<MemberRegistration>();
-            
-            using (SqlConnection con = new SqlConnection(connection))
+            try
             {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select * from Tbl_Member", con);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                dr = cmd.ExecuteReader();
-                              
-               while(dr.Read())
-                {
-                    MemberRegistration member = new MemberRegistration();
-                    member.MemberId = Convert.ToInt32(dr["MemberId"]);
-                    member.MemberFirstName = dr["MemberFirstName"].ToString();
-                    member.MemberMiddleName = dr["MemberMiddleName"].ToString();
-                    member.MemberLastName = dr["MemberLastName"].ToString();
-                    member.MemberAddress = dr["MemberAddress"].ToString();
-                    member.EmailAddress = dr["EmailAddress"].ToString();
-                    member.MembershipAmount = Convert.ToInt32(dr["MembershipAmount"]);
-                    member.MembershipDate = Convert.ToDateTime(dr["MembershipDate"].ToString());
-                    member.MembershipExpiryDate = Convert.ToDateTime(dr["MembershipExpiryDate"].ToString());
-                    member.MemberImageName = dr["MemberImageName"].ToString();
-                    member.MemberImagePath = dr["MemberImagePath"].ToString();
-                    member.CreateBy = dr["CreateBy"].ToString();
 
-                    MemberList.Add(member);
-                    
+                SqlDataReader dr;
+                List<MemberRegistration> MemberList = new List<MemberRegistration>();
+
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("select * from Tbl_Member", con);
+                    dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        MemberRegistration member = new MemberRegistration();
+                        member.MemberId = Convert.ToInt32(dr["MemberId"]);
+                        member.MemberFirstName = dr["MemberFirstName"].ToString();
+                        member.MemberMiddleName = dr["MemberMiddleName"].ToString();
+                        member.MemberLastName = dr["MemberLastName"].ToString();
+                        member.MemberAddress = dr["MemberAddress"].ToString();
+                        member.EmailAddress = dr["EmailAddress"].ToString();
+                        member.MembershipAmount = Convert.ToInt32(dr["MembershipAmount"]);
+                        member.MembershipDate = Convert.ToDateTime(dr["MembershipDate"].ToString());
+                        member.MembershipExpiryDate = Convert.ToDateTime(dr["MembershipExpiryDate"].ToString());
+                        member.MemberImageName = dr["MemberImageName"].ToString();
+                        member.MemberImagePath = dr["MemberImagePath"].ToString();
+                        member.CreateBy = dr["CreateBy"].ToString();
+
+                        MemberList.Add(member);
+
+                    }
+                    con.Close();
                 }
-                con.Close();
+                return MemberList;
             }
-            return MemberList;
+
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
 
 

@@ -76,5 +76,56 @@ namespace NNZFSC.Controllers
             }
             return View(ObjMember);
         }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+           
+            var model = objRegisterMember.GetMemberById(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(MemberRegistration objMember)
+        {
+
+            if (string.IsNullOrEmpty(objMember.MemberFirstName))
+                ModelState.AddModelError("Error", "Please enter First Name");
+
+            else if (string.IsNullOrEmpty(objMember.MemberLastName))
+                ModelState.AddModelError("Error", "Please enter Last Name");
+
+            else if (string.IsNullOrEmpty(objMember.MemberAddress))
+                ModelState.AddModelError("Error", "Please enter Member Address");
+
+
+            else if (string.IsNullOrEmpty(objMember.MembershipAmount.ToString()))
+                ModelState.AddModelError("Error", "Please enter Membership Amount");
+
+            else if (string.IsNullOrEmpty(Convert.ToString(objMember.MembershipDate)))
+                ModelState.AddModelError("Error", "Please enter Membership Date");
+
+            else
+            {
+
+                //  ObjMember.CreatedBy = Session["UserName"].ToString();
+                objMember.CreateBy = "Avi";
+
+                int MemberId = objRegisterMember.UpdateMember(objMember);
+                if (MemberId > 0)
+                {
+                    ViewBag.Text = "Member updated Successfully.";
+                }
+
+                else
+                {
+                    TempData["Message"] = "Some thing went wrong while Member updated.";
+                }
+                return RedirectToAction("Edit");
+            }
+
+            return View(objMember);
+
+        }
     }
 }
