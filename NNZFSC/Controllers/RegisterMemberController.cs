@@ -127,5 +127,11 @@ namespace NNZFSC.Controllers
             return View(objMember);
 
         }
+        [HttpPost]
+        public JsonResult GetExpirydate(DateTime date)
+        {
+            string ExpiryDate = date.AddYears(1).ToShortDateString();
+            return Json(ExpiryDate, JsonRequestBehavior.AllowGet);
+        }
     }
 }

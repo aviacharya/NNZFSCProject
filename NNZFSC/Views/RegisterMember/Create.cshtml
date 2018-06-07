@@ -4,6 +4,55 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+@*<script type="text/javascript">
+    $(document).ready(function () {
+    $('#MembershipDate').change(function () {
+     
+        var MembershipDate = this.value;
+        alert(MembershipDate);
+     
+        $.post("/RegisterMember/GetExpirydate", { date: MembershipDate },
+        function (data) {
+            $('#MembershipExpiryDate').val;
+        })
+        
+    });
+    });
+</script>*@
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            //$("#txtEmail").first().focus();
+
+            $("#MembershipDate").change(function () {
+                var MembershipDate = this.value;
+               
+                $.ajax({
+                    url: '/RegisterMember/GetExpirydate',
+                    type: 'POST',
+                    data: JSON.stringify({ date: MembershipDate }),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        if (data != "" || data != null) {
+                          
+                            $("#MembershipExpiryDate").val(data);
+
+                        }
+                        else {
+                            alert("Our system does not recognize this date. Please try again.");
+                            $("#MembershipDate").focus();
+                        }
+                    }
+                });
+            });
+        });
+</script>
+
+
+
 
 
 @using (Html.BeginForm())
@@ -57,12 +106,12 @@
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     @Html.LabelFor(model => model.MembershipAmount)
-                                    @Html.EditorFor(model => model.MembershipAmount, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.MembershipAmount, new { htmlAttributes = new { @class = "form-control"} })
                                     @Html.ValidationMessageFor(model => model.MembershipAmount, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-6 form-group">
                                     @Html.LabelFor(model => model.MembershipDate)
-                                    @Html.EditorFor(model => model.MembershipDate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.MembershipDate, new { htmlAttributes = new { @class = "form-control" , @id = "MembershipDate" } })
                                     @Html.ValidationMessageFor(model => model.MembershipDate, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -71,7 +120,7 @@
 
                             <div class="form-group">
                                 @Html.LabelFor(model => model.MembershipExpiryDate)
-                                @Html.EditorFor(model => model.MembershipExpiryDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.MembershipExpiryDate, new { htmlAttributes = new { @class = "form-control", @id = "MembershipExpiryDate" } })
                                 @Html.ValidationMessageFor(model => model.MembershipExpiryDate, "", new { @class = "text-danger" })
                             </div>
 
