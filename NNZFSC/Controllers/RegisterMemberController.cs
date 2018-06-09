@@ -31,8 +31,15 @@ namespace NNZFSC.Controllers
         [HttpGet]
         public ActionResult create()
         {
-            MemberRegistration MemberRegistration = new MemberRegistration();
+           MemberRegistration MemberRegistration = new MemberRegistration();
            return View(MemberRegistration);
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            objRegisterMember.DeleteMember(id);
+            return RedirectToAction("index");
         }
 
         [HttpPost]
