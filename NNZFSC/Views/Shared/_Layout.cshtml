@@ -48,16 +48,16 @@
                          @Html.ActionLink("Home", "Index", "Home",null, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("About", "About", "Home",new {@class="nav-link" })
+                        @Html.ActionLink("About", "About", "Home",null,new {@class="nav-link" })
                     </li>
                     <li class="nav-item">
-                         @Html.ActionLink("Events", "About", "Home" ,new {@class="nav-link" })
+                         @Html.ActionLink("Events", "About", "Home",null,new {@class="nav-link" })
                     </li>
                     <li class="nav-item">
-                         @Html.ActionLink("Contact", "About", "Home", new { @class = "nav-link" })
+                         @Html.ActionLink("Contact", "About", "Home",null, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
-                         @Html.ActionLink("Contact", "About", "Home", new { @class = "nav-link" })
+                         @Html.ActionLink("Contact", "About", "Home",null, new { @class = "nav-link" })
                     </li>
                 </ul>
 
@@ -68,17 +68,24 @@
     </nav>
 
 
-
     <div class="container body-content">
         @RenderBody()
-        <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+            
+            
+                <div class="row text-center">
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+                    <div class="col-12">
+                        <hr class="light">
+                        <h5>&copy; created and design by Avi Acharya</h5>
+                    </div>
+                </div>
+            
+
+        </footer>
+        </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 </body>
 </html>
