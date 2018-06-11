@@ -37,9 +37,14 @@ namespace NNZFSC.Repository
                     if (string.IsNullOrEmpty(member.MemberImagePath)) { member.MemberImagePath =""; }
                     cmd.Parameters.AddWithValue("@MemberImagePath", member.MemberImagePath); 
                     cmd.Parameters.AddWithValue("@CreateBy", member.CreateBy);
+                    if (string.IsNullOrEmpty(member.Gender)) { member.Gender = ""; }
+                    cmd.Parameters.AddWithValue("@Gender", member.Gender);
+                    cmd.Parameters.Add("@MemberId", SqlDbType.Int, 0, "MemberId");
+                    cmd.Parameters["@MemberId"].Direction = ParameterDirection.Output;
                     con.Open();
                     
-                    int insertedID = Convert.ToInt32(cmd.ExecuteNonQuery());
+                    cmd.ExecuteNonQuery();
+                    int insertedID = (int)cmd.Parameters["@MemberId"].Value;
                     con.Close();
                     return insertedID;
 

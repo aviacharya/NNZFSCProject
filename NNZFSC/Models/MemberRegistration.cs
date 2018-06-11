@@ -47,5 +47,9 @@ namespace NNZFSC.Models
         public string  MemberImagePath { get; set; }
 
         public string CreateBy { get; set; }
+
+        [Display(Name = "Gender")]
+        [Required(ErrorMessage = "Please enter the Membership Date")]
+        public string Gender { get; set; }
     }
 }

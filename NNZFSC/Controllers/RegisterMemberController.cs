@@ -68,8 +68,10 @@ namespace NNZFSC.Controllers
 
                 //  ObjMember.CreatedBy = Session["UserName"].ToString();
                 ObjMember.CreateBy = "Avi";
+                ObjMember.Gender = "M";
 
                 int MemberId = objRegisterMember.InsertMember(ObjMember);
+                int id = ObjMember.MemberId;
                 if (MemberId > 0)
                 {
                    ViewBag.Text = "Member Created Successfully.";

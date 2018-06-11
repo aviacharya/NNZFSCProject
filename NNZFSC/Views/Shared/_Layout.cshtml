@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>NNZFSC</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -15,25 +15,25 @@
 </head>
 <body>
     @*<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>*@
+        </div>*@
 
     <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
         <div class="container-fluid">
@@ -45,19 +45,19 @@
             <div class="collapse navbar-collapse" id="navbarResponsive" style="margin-left:-20px;">
                 <ul class="navbar-nav ml-auto ">
                     <li class="nav-item">
-                         @Html.ActionLink("Home", "Index", "Home",null, new { @class = "nav-link" })
+                        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("About", "About", "Home",null,new {@class="nav-link" })
+                        @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
-                         @Html.ActionLink("Events", "About", "Home",null,new {@class="nav-link" })
+                        @Html.ActionLink("Events", "About", "Home", null, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
-                         @Html.ActionLink("Contact", "About", "Home",null, new { @class = "nav-link" })
+                        @Html.ActionLink("Contact", "About", "Home", null, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
-                         @Html.ActionLink("Contact", "About", "Home",null, new { @class = "nav-link" })
+                        @Html.ActionLink("Contact", "About", "Home", null, new { @class = "nav-link" })
                     </li>
                 </ul>
 
@@ -65,27 +65,28 @@
             <div>
                 @Html.Partial("_LoginPartial")
             </div>
+        </div>
     </nav>
 
 
     <div class="container body-content">
         @RenderBody()
         <footer>
-            
-            
-                <div class="row text-center">
 
-                    <div class="col-12">
-                        <hr class="light">
-                        <h5>&copy; created and design by Avi Acharya</h5>
-                    </div>
+
+            <div class="row text-center">
+
+                <div class="col-12">
+                    <hr class="light">
+                    <h5>&copy; created and design by Avi Acharya</h5>
                 </div>
-            
+            </div>
+
 
         </footer>
-        </div>
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
