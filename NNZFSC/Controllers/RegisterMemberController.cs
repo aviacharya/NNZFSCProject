@@ -14,16 +14,18 @@ namespace NNZFSC.Controllers
         // GET: RegisterMember
 
         IRegisterMember objRegisterMember;
+        IPaymentMember objPaymentMember;
 
 
         public RegisterMemberController()
         {
             objRegisterMember = new RegisterMember();
+            objPaymentMember = new PaymentMember();
         }
         public ActionResult Index()
         {
             List<MemberRegistration> member = new List<MemberRegistration>();
-            member= objRegisterMember.AllMemberDetails().ToList();
+            member = objRegisterMember.AllMemberDetails().ToList();
             return View(member);
         }
 
@@ -31,8 +33,8 @@ namespace NNZFSC.Controllers
         [HttpGet]
         public ActionResult create()
         {
-           MemberRegistration MemberRegistration = new MemberRegistration();
-           return View(MemberRegistration);
+            MemberRegistration MemberRegistration = new MemberRegistration();
+            return View(MemberRegistration);
         }
 
         [HttpGet]
@@ -56,7 +58,7 @@ namespace NNZFSC.Controllers
             else if (string.IsNullOrEmpty(ObjMember.MemberAddress))
                 ModelState.AddModelError("Error", "Please enter Member Address");
 
-           
+
             else if (string.IsNullOrEmpty(ObjMember.MembershipAmount.ToString()))
                 ModelState.AddModelError("Error", "Please enter Membership Amount");
 
@@ -71,12 +73,24 @@ namespace NNZFSC.Controllers
                 ObjMember.Gender = "M";
 
                 int MemberId = objRegisterMember.InsertMember(ObjMember);
-                int id = ObjMember.MemberId;
+
                 if (MemberId > 0)
                 {
-                   ViewBag.Text = "Member Created Successfully.";
-                }
 
+
+                    int ResultPayment = InsertPayment(ObjMember, MemberId);
+
+                    if (ResultPayment > 0)
+                    {
+                        ViewBag.Text = "Member Created Successfully.";
+                    }
+
+                    else
+                    {
+                        TempData["Message"] = "Some thing went wrong while Member Created .";
+                    }
+
+                }
                 else
                 {
                     TempData["Message"] = "Some thing went wrong while Member Created.";
@@ -85,6 +99,27 @@ namespace NNZFSC.Controllers
             }
             return View(ObjMember);
         }
+
+        [NonAction]
+        public int InsertPayment(MemberRegistration ObjMember, int MemberId)
+        {
+            try {
+                MemberPayment ObjMemberPayment = new MemberPayment();
+                ObjMemberPayment.MemberId = MemberId;
+                ObjMemberPayment.PaymentDate = ObjMember.MembershipDate;
+                ObjMemberPayment.NextPaymentDate = ObjMember.MembershipExpiryDate;
+                ObjMemberPayment.PaymentAmount = ObjMember.MembershipAmount;
+                ObjMemberPayment.PaymentBy = "Avi";
+                ObjMemberPayment.IsRenewal = false;
+                int paymentid = objPaymentMember.InsertMemberPayment(ObjMemberPayment);
+                return paymentid;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
 
         [HttpGet]
         public ActionResult Edit(int id)
