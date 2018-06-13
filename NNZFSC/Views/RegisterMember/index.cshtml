@@ -87,8 +87,21 @@
                     @Html.DisplayFor(modelItem => item.CreateBy)
                 </td>
                 <td>
+                   
                     @Html.ActionLink("Edit", "Edit", new { id = item.MemberId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.MemberId }) |
+                    @*@Html.ActionLink("Renew", "Edit", new { id = item.MemberId }) |*@
+                    @Html.ActionLink(
+                                    linkText: "Renew",
+                                    actionName: "Edit",
+                                    controllerName: "Payment",
+                                    routeValues: new
+                                    {
+                                        id = item.MemberId
+       
+                                    },
+                                    htmlAttributes: null
+                                    )|
+                                             
                     @Html.ActionLink("Delete", "Delete", new { id = item.MemberId }, new { onclick = "return confirm('Are you sure you wish to delete this Member Rgistration ?');" })
                 </td>
             </tr>

@@ -10,6 +10,8 @@ namespace NNZFSC.Repository
     {
         int InsertMemberPayment(MemberPayment payment);
         int UpdateMemberPayment(MemberPayment payment);
-        IEnumerable<MemberPayment> GetMemberPaymentById(int id);
+        IEnumerable<MemberPayment> GetAllMemberPaymentById(int id);
+
+        MemberPayment GetMemberPaymentById(int id);
     }
 }

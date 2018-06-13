@@ -12,10 +12,79 @@ namespace NNZFSC.Repository
     {
 
         string connection = ConfigurationManager.ConnectionStrings["connection"].ToString();
-        public IEnumerable<MemberPayment> GetMemberPaymentById(int id)
+        public IEnumerable<MemberPayment> GetAllMemberPaymentById(int id)
         {
-            throw new NotImplementedException();
+           try
+            {
+
+                SqlDataReader dr;
+                List<MemberPayment> MemberPaymentList = new List<MemberPayment>();
+                using(SqlConnection con = new SqlConnection(connection))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("select * from Tbl_Payment where MemberId= " + id + "",con);
+                    dr = cmd.ExecuteReader();
+                    MemberPayment MemberPayment = new MemberPayment();
+                    while (dr.Read())
+                    {
+
+                        MemberPayment.MemberId = Convert.ToInt32(dr["PaymentAmount"]);
+                        MemberPayment.PaymentId = Convert.ToInt32(dr["PaymentId"]);
+                        MemberPayment.PaymentDate = Convert.ToDateTime(dr["PaymentDate"]);
+                        MemberPayment.PaymentAmount = Convert.ToInt32(dr["PaymentAmount"]);
+                        MemberPayment.NextPaymentDate = Convert.ToDateTime(dr["NextPaymentDate"]);
+                       // MemberPayment.IsRenewal = Convert.ToBoolean(dr["IsRenewal"]);
+                        MemberPaymentList.Add(MemberPayment);
+                    }
+
+                    con.Close();
+                }
+                return MemberPaymentList;
+            }
+
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
+
+
+        public MemberPayment GetMemberPaymentById(int id)
+        {
+            try
+            {
+
+                SqlDataReader dr;
+                MemberPayment MemberPayment = new MemberPayment();
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("select * from Tbl_Payment where IsRenewal='N' and MemberId= " + id + "", con);
+                    dr = cmd.ExecuteReader();
+                   
+                    while (dr.Read())
+                    {
+
+                        MemberPayment.MemberId = Convert.ToInt32(dr["PaymentAmount"]);
+                        MemberPayment.PaymentId = Convert.ToInt32(dr["PaymentId"]);
+                        MemberPayment.PaymentDate = Convert.ToDateTime(dr["PaymentDate"]);
+                        MemberPayment.PaymentAmount = Convert.ToInt32(dr["PaymentAmount"]);
+                        MemberPayment.NextPaymentDate = Convert.ToDateTime(dr["NextPaymentDate"]);
+                      
+                      
+                    }
+
+                    con.Close();
+                }
+                return MemberPayment;
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
 
         public int InsertMemberPayment(MemberPayment payment)
         {
