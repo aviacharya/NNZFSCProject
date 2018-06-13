@@ -16,6 +16,7 @@ namespace NNZFSC.Controllers
         public PaymentController()
         {
             objPayment = new PaymentMember();
+           
         }
         
         public ActionResult Index()

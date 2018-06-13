@@ -59,7 +59,7 @@ namespace NNZFSC.Repository
                 using (SqlConnection con = new SqlConnection(connection))
                 {
                     con.Open();
-                    SqlCommand cmd = new SqlCommand("select * from Tbl_Payment where IsRenewal='N' and MemberId= " + id + "", con);
+                    SqlCommand cmd = new SqlCommand("select * from View_MemberPayment where IsRenewal='N' and MemberId= " + id + "", con);
                     dr = cmd.ExecuteReader();
                    
                     while (dr.Read())
@@ -70,8 +70,18 @@ namespace NNZFSC.Repository
                         MemberPayment.PaymentDate = Convert.ToDateTime(dr["PaymentDate"]);
                         MemberPayment.PaymentAmount = Convert.ToInt32(dr["PaymentAmount"]);
                         MemberPayment.NextPaymentDate = Convert.ToDateTime(dr["NextPaymentDate"]);
-                      
-                      
+                        MemberPayment.MemberDetails = new MemberRegistration
+                        {
+                            MemberFirstName = dr["MemberFirstName"].ToString(),
+                            MemberMiddleName = dr["MemberMiddleName"].ToString(),
+                            MemberLastName = dr["MemberLastName"].ToString(),
+                            MemberAddress = dr["MemberAddress"].ToString(),
+                            EmailAddress = dr["EmailAddress"].ToString(),
+                            Gender = dr["Gender"].ToString(),
+                            MembershipAmount = Convert.ToInt32(dr["MembershipAmount"])
+
+                        };
+
                     }
 
                     con.Close();

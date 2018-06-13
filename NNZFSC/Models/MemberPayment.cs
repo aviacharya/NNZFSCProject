@@ -25,5 +25,7 @@ namespace NNZFSC.Models
         public int ? PaymentAmount { get; set; }
 
         public bool IsRenewal { get; set; }
+
+        public MemberRegistration MemberDetails { get; set; }
     }
 }
