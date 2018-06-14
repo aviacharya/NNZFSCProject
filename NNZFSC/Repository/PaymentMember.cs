@@ -28,7 +28,7 @@ namespace NNZFSC.Repository
                     while (dr.Read())
                     {
 
-                        MemberPayment.MemberId = Convert.ToInt32(dr["PaymentAmount"]);
+                        MemberPayment.MemberId = Convert.ToInt32(dr["MemberId"]);
                         MemberPayment.PaymentId = Convert.ToInt32(dr["PaymentId"]);
                         MemberPayment.PaymentDate = Convert.ToDateTime(dr["PaymentDate"]);
                         MemberPayment.PaymentAmount = Convert.ToInt32(dr["PaymentAmount"]);
@@ -65,7 +65,7 @@ namespace NNZFSC.Repository
                     while (dr.Read())
                     {
 
-                        MemberPayment.MemberId = Convert.ToInt32(dr["PaymentAmount"]);
+                        MemberPayment.MemberId = Convert.ToInt32(dr["MemberId"]);
                         MemberPayment.PaymentId = Convert.ToInt32(dr["PaymentId"]);
                         MemberPayment.PaymentDate = Convert.ToDateTime(dr["PaymentDate"]);
                         MemberPayment.PaymentAmount = Convert.ToInt32(dr["PaymentAmount"]);

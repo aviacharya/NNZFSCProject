@@ -27,11 +27,31 @@ namespace NNZFSC.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            //List<MemberPayment> MemberPayment = new List<MemberPayment>();
-            //MemberPayment = objPayment.GetMemberPaymentById(id).ToList();
+            
+            var payment = objPayment.GetMemberPaymentById(id);
+            return View(payment);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(MemberPayment payment)
+        {
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Create(int id)
+        {
 
             var payment = objPayment.GetMemberPaymentById(id);
             return View(payment);
+        }
+
+        [HttpPost]
+        public ActionResult Create(MemberPayment payment)
+        {
+
+            return View();
         }
     }
 }

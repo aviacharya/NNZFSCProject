@@ -61,7 +61,6 @@ namespace NNZFSC.Repository
            
         }
 
-
         public int UpdateMember (MemberRegistration member)
         {
             try
