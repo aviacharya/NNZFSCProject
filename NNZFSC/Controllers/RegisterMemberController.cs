@@ -44,6 +44,37 @@ namespace NNZFSC.Controllers
             return RedirectToAction("index");
         }
 
+
+        [HttpGet]
+        public ActionResult Details( int id)
+        {
+            MemberRegistration MemberRegistration = new MemberRegistration();
+            var memberDetails = objRegisterMember.GetMemberById(3);
+            var paymentDetails = objPaymentMember.GetPaymentDetails(3);
+            int maxId = paymentDetails.Max(x => x.PaymentId);
+                     
+            foreach(var item in paymentDetails)
+            {
+                if(item.PaymentId == maxId) { item.disable = "enabled"; }
+                memberDetails.MemberPaymentList.Add(new MemberPayment
+                {
+                    MemberId = item.MemberId,
+                    PaymentId = item.PaymentId,
+                    PaymentAmount = item.PaymentAmount,
+                    PaymentDate = item.PaymentDate,
+                    NextPaymentDate = item.NextPaymentDate,
+                    _NextPaymentDateToDisplay = item._NextPaymentDateToDisplay,
+                    _PaymentDateToDisplay = item._PaymentDateToDisplay,
+                    disable= item.disable
+
+                });
+               
+            }
+            return View(memberDetails);
+        }
+
+
+
         [HttpPost]
         public ActionResult create(MemberRegistration ObjMember)
         {
@@ -176,6 +207,35 @@ namespace NNZFSC.Controllers
         {
             string ExpiryDate = date.AddYears(1).ToShortDateString();
             return Json(ExpiryDate, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult UpdateRenewMember(MemberPayment payment)
+        {
+            try
+            {
+                payment.IsRenewal = true;
+                payment.PaymentBy = "Avi";
+                int PaymentId = objPaymentMember.UpdateMemberPayment(payment);
+                if (PaymentId > 0)
+                {
+                    ViewBag.Text = "Payment updated Successfully.";
+
+                }
+
+                else
+                {
+                    TempData["Message"] = "Some thing went wrong while Member updated.";
+                }
+
+                return Json(payment, JsonRequestBehavior.AllowGet);
+            }
+
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+           
         }
     }
 }

@@ -1,0 +1,176 @@
+﻿@model NNZFSC.Models.MemberRegistration
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var grid = new WebGrid(Model.MemberPaymentList, canPage: true, rowsPerPage: 5, selectionFieldName: "selectedRow");
+}
+<link href="~/Content/Gridmvc.css" rel="stylesheet" />
+<script type="text/javascript">
+  
+    $(function () {
+        $('.edit-mode').hide();
+        $('.edit-user, .cancel-user').on('click', function () {
+            var tr = $(this).parents('tr:first');
+            tr.find('.edit-mode, .display-mode').toggle();
+           
+        });
+
+
+        $(".edit-mode").change(function () {
+            var tr = $(this).parents('tr:first');
+            var PaymentDate = tr.find("#PaymentDate").val();
+            var PaymentId = tr.find("#PaymentId").text();
+             var date = new Date(PaymentDate);
+             if (date == null || date == "Invalid Date") {
+                 alert("Enter correct format of date : (mm/dd/YY)");
+                 return;
+             }
+           
+            var newdate = new Date(date);
+            var dd = newdate.getDate();
+            var mm = newdate.getMonth() + 1;
+            var y = newdate.getFullYear() + 1;
+            var NextPaymentDate = mm + '/' + dd + '/' + y;
+            document.getElementById("NextPaymentDate-" + PaymentId).value = NextPaymentDate;
+                      
+            alert(test);
+           // tr.find('.edit-mode, .display-mode').toggle();
+           // document.getElementById('NextPaymentDate').value = NextPaymentDate;
+            
+        });
+
+        $('.save-user').on('click', function () {
+            var tr = $(this).parents('tr:first');
+            var PaymentId = tr.find("#PaymentId").text();
+            alert(PaymentId);
+            var PaymentDate = tr.find("#PaymentDate").val();
+            alert(PaymentDate);
+            var NextPaymentDate = tr.find("#NextPaymentDate-" + PaymentId).val();
+            alert(NextPaymentDate);
+            var Amount = tr.find("#Amount").val();
+          
+            tr.find("#lblPaymentDate").text(PaymentDate);
+            tr.find("#lblNextPaymentDate").text(NextPaymentDate);
+            tr.find("#lblAmount").text(Amount);
+            tr.find('.edit-mode, .display-mode').toggle();
+           
+            
+            var UserModel =
+            {
+                "PaymentId": PaymentId,
+                "PaymentDate": PaymentDate,
+                "PaymentAmount": Amount,
+                "NextPaymentDate": NextPaymentDate
+            };
+            $.ajax({
+                url: '/RegisterMember/UpdateRenewMember',
+                data: JSON.stringify(UserModel),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    alert("Updated Successfully");
+                }
+            });
+
+        });
+    })
+
+
+   
+
+
+</script>  
+
+
+
+
+
+<h2>Details</h2>
+
+<div class="row">
+    <div class="col-md-4" style="border-right:outset">
+
+        <div class="text-center">
+
+            <img src="~/img/NNZFSC_Logo.jpg" class="avatar img-circle" alt="avatar" height="150" width="150">
+        </div>
+        <br />
+        <div class="text-center">
+            @Html.LabelFor(model => model.MemberId, htmlAttributes: new { @class = "control-label col-md-4" })
+            @Html.TextBoxFor(model => model.MemberId, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+
+        </div>
+        <br />
+        <div class="text-center">
+            @Html.LabelFor(model => model.MemberFirstName, htmlAttributes: new { @class = "control-label col-md-4" })
+            @Html.TextBoxFor(model => model.MemberFirstName, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+
+        </div>
+        <br />
+        <div class="text-center">
+            @Html.LabelFor(model => model.MemberMiddleName, htmlAttributes: new { @class = "control-label col-md-4" })
+            @Html.TextBoxFor(model => model.MemberMiddleName, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+
+        </div>
+        <br />
+        <div class="text-center">
+            @Html.LabelFor(model => model.MemberLastName, htmlAttributes: new { @class = "control-label col-md-4" })
+            @Html.TextBoxFor(model => model.MemberLastName, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+
+        </div>
+        <br />
+        <div class="text-center">
+            @Html.LabelFor(model => model.MemberAddress, htmlAttributes: new { @class = "control-label col-md-4" })
+            @Html.TextBoxFor(model => model.MemberAddress, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+
+        </div>
+        <br />
+        <div class="text-center">
+            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-4" })
+            @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+
+        </div>
+        <br />
+        <div class="text-center">
+            @Html.LabelFor(model => model.MembershipDate, htmlAttributes: new { @class = "control-label col-md-4" })
+            @Html.TextBoxFor(model => model.MembershipDate, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+
+        </div>
+
+        <br />
+       
+    </div>
+    <div class="col-md-8">
+        <div>  <h5 class="jumbotron" style="padding:2rem">Member Renew Details</h5></div>
+        <div id="gridContent" style="padding:20px; margin-top:60px">
+            @grid.GetHtml(
+        tableStyle: "webgrid-table",
+        headerStyle: "webgrid-header",
+        footerStyle: "webgrid-footer",
+        alternatingRowStyle: "webgrid-alternating-row",
+        selectedRowStyle: "webgrid-selected-row",
+        rowStyle: "webgrid-row-style",
+        mode: WebGridPagerModes.All,
+        columns:
+            grid.Columns(
+             grid.Column("PaymentId", format: @<text>  <span class="display-mode">@item.PaymentId </span> <label id="PaymentId" class="edit-mode">@item.PaymentId</label> </text>, style: "col1Width"),
+             grid.Column("PaymentDate", "Payment Date", format: @<text>  <span class="display-mode"> <label id="lblPaymentDate">@item._PaymentDateToDisplay</label> </span> <input type="text" id="PaymentDate" value="@item._PaymentDateToDisplay" class="edit-mode" /></text>, style: "col2Width"),
+             grid.Column("PaymentAmount", "Payment Amount", format: @<text> <span class="display-mode"> <label id="lblAmount">@item.PaymentAmount</label> </span>  <input type="text" id="Amount" value="@item.PaymentAmount" class="edit-mode" /> </text>, style: "col2Width"),
+             grid.Column("NextPaymentDate", "Expiry Date", format: @<text> <span class="display-mode"> <label id="lblNextPaymentDate">@item._NextPaymentDateToDisplay</label> </span>  <input type="text" id="NextPaymentDate-@item.PaymentId" value="@item._NextPaymentDateToDisplay" class="edit-mode" readonly /> </text>, style: "col2Width"),
+             grid.Column("Action", format: @<text>
+                    <button class="edit-user display-mode" @item.disable >Edit</button>
+                    <button class="save-user edit-mode">Save</button>
+                    <button class="cancel-user edit-mode">Cancel</button>
+            </text>, style: "col3Width", canSort: false)
+           ))
+
+        </div>
+
+    </div>
+
+</div>
+<p>
+   
+    @Html.ActionLink("Back to List", "Index")
+</p>

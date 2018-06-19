@@ -9,6 +9,7 @@ namespace NNZFSC.Models
 {
     public class MemberRegistration
     {
+       
         [Key]
         public int MemberId { get; set; }
 
@@ -41,7 +42,6 @@ namespace NNZFSC.Models
         [Required(ErrorMessage = "Please enter the Membership Date")]
         public DateTime ? MembershipExpiryDate { get; set; }
 
-
         public string  MemberImageName { get; set; }
 
         public string  MemberImagePath { get; set; }
@@ -51,5 +51,9 @@ namespace NNZFSC.Models
         [Display(Name = "Gender")]
         [Required(ErrorMessage = "Please enter the Membership Date")]
         public string Gender { get; set; }
+
+        public IList<MemberPayment> MemberPaymentList { get; set; }
+
+
     }
 }

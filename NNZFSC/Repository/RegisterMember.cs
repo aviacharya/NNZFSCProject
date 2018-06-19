@@ -12,6 +12,7 @@ namespace NNZFSC.Repository
     public class RegisterMember :IRegisterMember
     {
 
+       
         string connection = ConfigurationManager.ConnectionStrings["connection"].ToString();
         public int InsertMember(MemberRegistration member)
 
@@ -117,6 +118,7 @@ namespace NNZFSC.Repository
                     SqlCommand cmd = new SqlCommand("select * from Tbl_Member where MemberId="+ id +" ", con);
                     dr = cmd.ExecuteReader();
                     MemberRegistration member = new MemberRegistration();
+                    member.MemberPaymentList = new List<MemberPayment>();
                     while (dr.Read())
                     {
                       

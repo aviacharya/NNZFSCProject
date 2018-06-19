@@ -13,5 +13,6 @@ namespace NNZFSC.Repository
         IEnumerable<MemberPayment> GetAllMemberPaymentById(int id);
 
         MemberPayment GetMemberPaymentById(int id);
+        IEnumerable<MemberPayment> GetPaymentDetails(int id);
     }
 }

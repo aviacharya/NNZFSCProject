@@ -6,6 +6,7 @@ using NNZFSC.Models;
 using System.Configuration;
 using System.Data.Sql;
 using System.Data.SqlClient;
+
 namespace NNZFSC.Repository
 {
     public class PaymentMember : IPaymentMember
@@ -14,15 +15,15 @@ namespace NNZFSC.Repository
         string connection = ConfigurationManager.ConnectionStrings["connection"].ToString();
         public IEnumerable<MemberPayment> GetAllMemberPaymentById(int id)
         {
-           try
+            try
             {
 
                 SqlDataReader dr;
                 List<MemberPayment> MemberPaymentList = new List<MemberPayment>();
-                using(SqlConnection con = new SqlConnection(connection))
+                using (SqlConnection con = new SqlConnection(connection))
                 {
                     con.Open();
-                    SqlCommand cmd = new SqlCommand("select * from Tbl_Payment where MemberId= " + id + "",con);
+                    SqlCommand cmd = new SqlCommand("select * from Tbl_Payment where MemberId= " + id + "", con);
                     dr = cmd.ExecuteReader();
                     MemberPayment MemberPayment = new MemberPayment();
                     while (dr.Read())
@@ -33,7 +34,7 @@ namespace NNZFSC.Repository
                         MemberPayment.PaymentDate = Convert.ToDateTime(dr["PaymentDate"]);
                         MemberPayment.PaymentAmount = Convert.ToInt32(dr["PaymentAmount"]);
                         MemberPayment.NextPaymentDate = Convert.ToDateTime(dr["NextPaymentDate"]);
-                       // MemberPayment.IsRenewal = Convert.ToBoolean(dr["IsRenewal"]);
+                        // MemberPayment.IsRenewal = Convert.ToBoolean(dr["IsRenewal"]);
                         MemberPaymentList.Add(MemberPayment);
                     }
 
@@ -42,7 +43,7 @@ namespace NNZFSC.Repository
                 return MemberPaymentList;
             }
 
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw e;
             }
@@ -61,17 +62,16 @@ namespace NNZFSC.Repository
                     con.Open();
                     SqlCommand cmd = new SqlCommand("select * from View_MemberPayment where IsRenewal='N' and MemberId= " + id + "", con);
                     dr = cmd.ExecuteReader();
-                   
+
                     while (dr.Read())
                     {
 
-                        MemberPayment.MemberId = Convert.ToInt32(dr["MemberId"]);
+
                         MemberPayment.PaymentId = Convert.ToInt32(dr["PaymentId"]);
-                        MemberPayment.PaymentDate = Convert.ToDateTime(dr["PaymentDate"]);
-                        MemberPayment.PaymentAmount = Convert.ToInt32(dr["PaymentAmount"]);
                         MemberPayment.NextPaymentDate = Convert.ToDateTime(dr["NextPaymentDate"]);
                         MemberPayment.MemberDetails = new MemberRegistration
                         {
+                            MemberId = Convert.ToInt32(dr["MemberId"]),
                             MemberFirstName = dr["MemberFirstName"].ToString(),
                             MemberMiddleName = dr["MemberMiddleName"].ToString(),
                             MemberLastName = dr["MemberLastName"].ToString(),
@@ -102,10 +102,12 @@ namespace NNZFSC.Repository
             {
                 using (SqlConnection con = new SqlConnection(connection))
                 {
+
                     SqlCommand cmd = new SqlCommand("sp_AddPayment", con);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@MemberId", payment.MemberId);
                     cmd.Parameters.AddWithValue("@PaymentDate", payment.PaymentDate);
+                    cmd.Parameters.AddWithValue("@NextPaymentDate", payment.NextPaymentDate);
                     if (string.IsNullOrEmpty(payment.PaymentBy)) { payment.PaymentBy = ""; }
                     cmd.Parameters.AddWithValue("@PaymentBy", payment.PaymentBy);
                     cmd.Parameters.AddWithValue("@PaymentAmount", payment.PaymentAmount);
@@ -135,6 +137,7 @@ namespace NNZFSC.Repository
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@PaymentId", payment.PaymentId);
                     cmd.Parameters.AddWithValue("@PaymentDate", payment.PaymentDate);
+                    cmd.Parameters.AddWithValue("@NextPaymentDate", payment.NextPaymentDate);
                     if (string.IsNullOrEmpty(payment.PaymentBy)) { payment.PaymentBy = ""; }
                     cmd.Parameters.AddWithValue("@PaymentBy", payment.PaymentBy);
                     cmd.Parameters.AddWithValue("@PaymentAmount", payment.PaymentAmount);
@@ -151,6 +154,47 @@ namespace NNZFSC.Repository
             {
                 throw ex;
             }
+        }
+
+
+        public IEnumerable<MemberPayment> GetPaymentDetails(int id)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    SqlDataReader dr;
+                    List<MemberPayment> PaymentList = new List<MemberPayment>();
+                     con.Open();
+                    SqlCommand cmd = new SqlCommand("select * from Tbl_Payment where MemberId= " + id +"",con);
+                    dr = cmd.ExecuteReader();
+                    while(dr.Read())
+                    {
+                        MemberPayment payment = new MemberPayment();
+                        payment.PaymentId = Convert.ToInt32(dr["PaymentId"]);
+                        payment.MemberId = Convert.ToInt32(dr["MemberId"]);
+                        payment.PaymentDate = Convert.ToDateTime(dr["PaymentDate"]);
+                        DateTime dt = Convert.ToDateTime(dr["PaymentDate"]);
+                        payment._PaymentDateToDisplay = dt.ToShortDateString();
+                        payment.PaymentAmount = Convert.ToInt32(dr["PaymentAmount"]);
+                        payment.NextPaymentDate = Convert.ToDateTime(dr["NextPaymentDate"]);
+                        DateTime dtNextPay = Convert.ToDateTime(dr["NextPaymentDate"]);
+                        payment._NextPaymentDateToDisplay = dtNextPay.ToShortDateString();
+                        payment.disable = "disabled";
+                        PaymentList.Add(payment);
+                    }
+
+                    con.Close();
+                    return PaymentList;
+                }
+
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }
