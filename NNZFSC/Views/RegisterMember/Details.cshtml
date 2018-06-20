@@ -33,28 +33,23 @@
             var y = newdate.getFullYear() + 1;
             var NextPaymentDate = mm + '/' + dd + '/' + y;
             document.getElementById("NextPaymentDate-" + PaymentId).value = NextPaymentDate;
-                      
-            alert(test);
-           // tr.find('.edit-mode, .display-mode').toggle();
-           // document.getElementById('NextPaymentDate').value = NextPaymentDate;
-            
+                            
         });
 
         $('.save-user').on('click', function () {
             var tr = $(this).parents('tr:first');
             var PaymentId = tr.find("#PaymentId").text();
-            alert(PaymentId);
             var PaymentDate = tr.find("#PaymentDate").val();
-            alert(PaymentDate);
+        //    alert(PaymentDate);
             var NextPaymentDate = tr.find("#NextPaymentDate-" + PaymentId).val();
-            alert(NextPaymentDate);
+         //   alert(PaymentDate);
             var Amount = tr.find("#Amount").val();
           
             tr.find("#lblPaymentDate").text(PaymentDate);
             tr.find("#lblNextPaymentDate").text(NextPaymentDate);
             tr.find("#lblAmount").text(Amount);
             tr.find('.edit-mode, .display-mode').toggle();
-           
+         //   alert(PaymentDate);
             
             var UserModel =
             {
@@ -63,6 +58,7 @@
                 "PaymentAmount": Amount,
                 "NextPaymentDate": NextPaymentDate
             };
+      //      alert(PaymentDate);
             $.ajax({
                 url: '/RegisterMember/UpdateRenewMember',
                 data: JSON.stringify(UserModel),
