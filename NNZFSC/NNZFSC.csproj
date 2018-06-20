@@ -260,6 +260,33 @@
     <Content Include="Content\MenuStyle.css" />
     <Content Include="Content\MVCControlToolkit.Controls.ServerTreeview-3.0.0.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Dashboard\animate.css" />
+    <Content Include="Dashboard\animsition.min.css" />
+    <Content Include="Dashboard\animsition.min.js" />
+    <Content Include="Dashboard\bootstrap-progressbar-3.3.4.min.css" />
+    <Content Include="Dashboard\bootstrap-progressbar.min.js" />
+    <Content Include="Dashboard\bootstrap.min.css" />
+    <Content Include="Dashboard\bootstrap.min.js" />
+    <Content Include="Dashboard\Chart.bundle.min.js" />
+    <Content Include="Dashboard\circle-progress.min.js" />
+    <Content Include="Dashboard\font-awesome.min.css" />
+    <Content Include="Dashboard\font-face.css" />
+    <Content Include="Dashboard\fontawesome-all.min.css" />
+    <Content Include="Dashboard\hamburgers.min.css" />
+    <Content Include="Dashboard\jquery-3.2.1.min.js" />
+    <Content Include="Dashboard\jquery.counterup.min.js" />
+    <Content Include="Dashboard\jquery.waypoints.min.js" />
+    <Content Include="Dashboard\main.js" />
+    <Content Include="Dashboard\material-design-iconic-font.min.css" />
+    <Content Include="Dashboard\perfect-scrollbar.css" />
+    <Content Include="Dashboard\perfect-scrollbar.js" />
+    <Content Include="Dashboard\popper.min.js" />
+    <Content Include="Dashboard\select2.min.css" />
+    <Content Include="Dashboard\select2.min.js" />
+    <Content Include="Dashboard\slick.css" />
+    <Content Include="Dashboard\slick.min.js" />
+    <Content Include="Dashboard\theme.css" />
+    <Content Include="Dashboard\wow.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -717,6 +744,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="bin\" />
+    <Folder Include="obj\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
