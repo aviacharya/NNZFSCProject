@@ -43,97 +43,313 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="container">
-        <h1 class="display-4">Registration Form</h1>
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="row">
-                <form>
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                @Html.LabelFor(model => model.MemberFirstName)
-                                @Html.EditorFor(model => model.MemberFirstName, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.MemberFirstName, "", new { @class = "text-danger" })
 
-                            </div>
-                            <div class="col-md-6 form-group">
-                                @Html.LabelFor(model => model.MemberMiddleName)
-                                @Html.EditorFor(model => model.MemberMiddleName, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.MemberMiddleName, "", new { @class = "text-danger" })
-                            </div>
 
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Dashboard</title>
+
+        <!--- CSS-->
+        @*<link href="~/Dashboard/font-face.css" rel="stylesheet" media="all" />
+            <link href="~/Dashboard/font-awesome.min.css" rel="stylesheet" media="all" />
+            <link href="~/Dashboard/fontawesome-all.min.css" rel="stylesheet" media="all" />*@
+        @*<link href="~/Dashboard/material-design-iconic-font.min.css" rel="stylesheet" media="all" />*@
+        <link href="~/Dashboard/bootstrap.min.css" rel="stylesheet" media="all" />
+
+        <link href="~/Dashboard/animsition.min.css" rel="stylesheet" media="all" />
+        @*<link href="~/Dashboard/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all" />*@
+        @*<link href="~/Dashboard/animate.css" rel="stylesheet" media="all"/>*@
+        <link href="~/Dashboard/hamburgers.min.css" rel="stylesheet" media="all" />
+        @*<link href="~/Dashboard/slick.css" rel="stylesheet" media="all" />
+            <link href="~/Dashboard/select2.min.css" rel="stylesheet" media="all" />*@
+        @*<link href="~/Dashboard/perfect-scrollbar.css" rel="stylesheet" media="all" />*@
+
+
+        <link href="~/Dashboard/theme.css" rel="stylesheet" />
+
+
+    </head>
+    <body class="animsition">
+        <div class="page-wrapper">
+            <!-- HEADER MOBILE-->
+            <header class="header-mobile d-block d-lg-none">
+                <div class="header-mobile__bar">
+                    <div class="container-fluid">
+                        <div class="header-mobile-inner">
+
+                            <button class="hamburger hamburger--slider" type="button">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
                         </div>
+                    </div>
+                </div>
+                <nav class="navbar-mobile">
+                    <div class="container-fluid">
+                        <ul class="navbar-mobile__list list-unstyled">
+                            <li class="has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-tachometer-alt"></i>Dashboard
+                                </a>
+                                <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                    <li>
+                                        <a href="index.html">Member</a>
+                                        @Html.ActionLink(linkText: "Register Member", actionName: "create", controllerName: "RegisterMember")
 
-                      
+                                    </li>
+                                    <li>
+                                        <a href="index2.html">Update Member</a>
+                                        @Html.ActionLink(linkText: "Update Member", actionName: "Edit", controllerName: "RegisterMember", routeValues: new { id = 0 }, htmlAttributes: null)
+                                    </li>
+                                    <li>
+                                        <a href="index3.html">Payment Details</a>
+                                        @Html.ActionLink(linkText: "Payment Details", actionName: "Details", controllerName: "RegisterMember", routeValues: new { id = 0 }, htmlAttributes: null)
+
+                                    </li>
+                                    <li>
+                                        <a href="index4.html">Dashboard 4</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+
+                            <li>
+                                <a href="form.html">
+                                    <i class="far fa-check-square"></i> Member List
+                                </a>
+                            </li>
+
+                            <li class="has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-calendar-alt"></i>Events
+                                </a>
+                                <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                    <li>
+                                        <a href="button.html">Create</a>
+                                    </li>
+                                    <li>
+                                        <a href="badge.html">Update</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!-- END HEADER MOBILE-->
+            <!-- MENU SIDEBAR-->
+            <aside class="menu-sidebar d-none d-lg-block">
+
+                <div class="menu-sidebar__content js-scrollbar1">
+                    <nav class="navbar-sidebar">
+                        <ul class="list-unstyled navbar__list">
+                            <li class="active has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-tachometer-alt"></i>Dashboard
+                                </a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                    <li>
+
+                                        @Html.ActionLink(linkText: "Register Member", actionName: "create", controllerName: "RegisterMember")
+                                    </li>
+                                    <li>
+
+                                        @Html.ActionLink(linkText: "Update Member", actionName: "Edit", controllerName: "RegisterMember", routeValues: new { id = 0 }, htmlAttributes: null)
+                                    </li>
+                                    <li>
+
+                                        @Html.ActionLink(linkText: "Payment Details", actionName: "Details", controllerName: "RegisterMember", routeValues: new { id = 0 }, htmlAttributes: null)
+
+                                    </li>
+                                    <li>
+                                        <a href="index4.html">Dashboard 4</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+
+                            <li>
+                                <a href="form.html">
+                                    <i class="far fa-check-square"></i> Member List
+                                </a>
+                            </li>
+
+                            <li class="has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-calendar-alt"></i>Events
+                                </a>
+                                <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                    <li>
+                                        <a href="button.html">Create</a>
+                                    </li>
+                                    <li>
+                                        <a href="badge.html">Update</a>
+                                    </li>
+
+
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+            <!-- END MENU SIDEBAR-->
+            <!-- PAGE CONTAINER-->
+            <!-- HEADER DESKTOP-->
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-6 form-group">
-                                @Html.LabelFor(model => model.MemberLastName)
-                                @Html.EditorFor(model => model.MemberLastName, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.MemberLastName, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-6 form-group">
-                                @Html.LabelFor(model => model.EmailAddress)
-                                @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-12 ">
-                                <div> @Html.LabelFor(model => model.MemberAddress)</div>
 
-                                @*@Html.TextAreaFor(m => m.MemberAddress, new { @class = "form-control" })*@
-                                @Html.TextAreaFor(model => model.MemberAddress, 9, 20, htmlAttributes: new { style = "max-width: 85%; width: 85%;" })
-                            </div>
-                            </div>
+                          
+                                <!--design here-->
 
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    @Html.LabelFor(model => model.MembershipAmount)
-                                    @Html.EditorFor(model => model.MembershipAmount, new { htmlAttributes = new { @class = "form-control"} })
-                                    @Html.ValidationMessageFor(model => model.MembershipAmount, "", new { @class = "text-danger" })
+
+                                <h2 style="margin:20px 30px">Registration Form</h2> <br />
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+
+                                    <form>
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-6 form-group">
+                                                    @Html.LabelFor(model => model.MemberFirstName)
+                                                    @Html.EditorFor(model => model.MemberFirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.MemberFirstName, "", new { @class = "text-danger" })
+
+                                                </div>
+                                                <div class="col-md-6 form-group">
+                                                    @Html.LabelFor(model => model.MemberMiddleName)
+                                                    @Html.EditorFor(model => model.MemberMiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.MemberMiddleName, "", new { @class = "text-danger" })
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-md-6 form-group">
+                                                    @Html.LabelFor(model => model.MemberLastName)
+                                                    @Html.EditorFor(model => model.MemberLastName, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.MemberLastName, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-6 form-group">
+                                                    @Html.LabelFor(model => model.EmailAddress)
+                                                    @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12 ">
+                                                    <div> @Html.LabelFor(model => model.MemberAddress)</div>
+
+                                                    @*@Html.TextAreaFor(m => m.MemberAddress, new { @class = "form-control" })*@
+                                                    @Html.TextAreaFor(model => model.MemberAddress, 9, 20, htmlAttributes: new { style = "max-width: 85%; width: 85%;" })
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6 form-group">
+                                                    @Html.LabelFor(model => model.MembershipAmount)
+                                                    @Html.EditorFor(model => model.MembershipAmount, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.MembershipAmount, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-6 form-group">
+                                                    @Html.LabelFor(model => model.MembershipDate)
+                                                    @Html.EditorFor(model => model.MembershipDate, new { htmlAttributes = new { @class = "form-control", @id = "MembershipDate" } })
+                                                    @Html.ValidationMessageFor(model => model.MembershipDate, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.MembershipExpiryDate)
+                                                @Html.EditorFor(model => model.MembershipExpiryDate, new { htmlAttributes = new { @class = "form-control", @id = "MembershipExpiryDate" } })
+                                                @Html.ValidationMessageFor(model => model.MembershipExpiryDate, "", new { @class = "text-danger" })
+                                            </div>
+
+
+
+                                            <div class="row">
+                                                <div class="col-md-12 form-group">
+                                                    @Html.LabelFor(model => model.MemberImageName)
+                                                    @Html.EditorFor(model => model.MemberImageName, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.MemberImageName, "", new { @class = "text-danger" })
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-md-12 form-group">
+                                                    <input type="submit" value="save" class="btn btn-success" />
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
+
                                 </div>
-                                <div class="col-md-6 form-group">
-                                    @Html.LabelFor(model => model.MembershipDate)
-                                    @Html.EditorFor(model => model.MembershipDate, new { htmlAttributes = new { @class = "form-control" , @id = "MembershipDate" } })
-                                    @Html.ValidationMessageFor(model => model.MembershipDate, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
 
 
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.MembershipExpiryDate)
-                                @Html.EditorFor(model => model.MembershipExpiryDate, new { htmlAttributes = new { @class = "form-control", @id = "MembershipExpiryDate" } })
-                                @Html.ValidationMessageFor(model => model.MembershipExpiryDate, "", new { @class = "text-danger" })
-                            </div>
-
-
-
-                            <div class="row">
-                                <div class="col-md-12 form-group">
-                                    @Html.LabelFor(model => model.MemberImageName)
-                                    @Html.EditorFor(model => model.MemberImageName, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.MemberImageName, "", new { @class = "text-danger" })
+                                <div>
+                                    @Html.ActionLink("Back to List", "Index")
                                 </div>
 
-                            </div>
-                        <div class="row">
+                          
 
-                            <div class="col-md-12 form-group">
-                                <input type="submit" value="save" class="btn btn-success" />
-                              
-                            </div>
-                        </div>
+
 
                         </div>
-                </form>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
+
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+
+        <!--- Script-->
+        <script src="~/Dashboard/jquery-3.2.1.min.js"></script>
+        @*<script src="~/Dashboard/popper.min.js"></script>*@
+        <script src="~/Dashboard/bootstrap.min.js"></script>
+        @*<script src="~/Dashboard/slick.min.js"></script>
+            <script src="~/Dashboard/wow.min.js"></script>*@
+
+        <script src="~/Dashboard/animsition.min.js"></script>
+        @*<script src="~/Dashboard/bootstrap-progressbar.min.js"></script>
+            <script src="~/Dashboard/jquery.waypoints.min.js"></script>
+            <script src="~/Dashboard/jquery.counterup.min.js"></script>
+            <script src="~/Dashboard/circle-progress.min.js"></script>
+            <script src="~/Dashboard/perfect-scrollbar.js"></script>
+
+            <script src="~/Dashboard/Chart.bundle.min.js"></script>
+            <script src="~/Dashboard/select2.min.js"></script>*@
+
+        <script src="~/Dashboard/main.js"></script>
+
+    </body>
+
+
+
+
+
+
+
+
+
+
+   
+   
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+

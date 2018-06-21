@@ -12,19 +12,19 @@
 
     <!--- CSS-->
 
-    <link href="~/Dashboard/font-face.css" rel="stylesheet" media="all" />
+    @*<link href="~/Dashboard/font-face.css" rel="stylesheet" media="all" />
     <link href="~/Dashboard/font-awesome.min.css" rel="stylesheet" media="all" />
-    <link href="~/Dashboard/fontawesome-all.min.css" rel="stylesheet" media="all" />
-    <link href="~/Dashboard/material-design-iconic-font.min.css" rel="stylesheet" media="all" />
+    <link href="~/Dashboard/fontawesome-all.min.css" rel="stylesheet" media="all" />*@
+    @*<link href="~/Dashboard/material-design-iconic-font.min.css" rel="stylesheet" media="all" />*@
     <link href="~/Dashboard/bootstrap.min.css" rel="stylesheet" media="all" />
 
     <link href="~/Dashboard/animsition.min.css" rel="stylesheet" media="all" /> 
-    <link href="~/Dashboard/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all" />
-    <link href="~/Dashboard/animate.css" rel="stylesheet" media="all"/>
+   @*<link href="~/Dashboard/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all" />*@
+    @*<link href="~/Dashboard/animate.css" rel="stylesheet" media="all"/>*@
     <link href="~/Dashboard/hamburgers.min.css" rel="stylesheet" media="all" />
-    <link href="~/Dashboard/slick.css" rel="stylesheet" media="all" />
-    <link href="~/Dashboard/select2.min.css" rel="stylesheet" media="all" />
-    <link href="~/Dashboard/perfect-scrollbar.css" rel="stylesheet" media="all" />
+    @*<link href="~/Dashboard/slick.css" rel="stylesheet" media="all" />
+    <link href="~/Dashboard/select2.min.css" rel="stylesheet" media="all" />*@
+    @*<link href="~/Dashboard/perfect-scrollbar.css" rel="stylesheet" media="all" />*@
 
      
     <link href="~/Dashboard/theme.css" rel="stylesheet" />
@@ -32,155 +32,179 @@
  
 </head>
 <body class="animsition">
-
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
-       
-        <!-- END HEADER MOBILE-->
-        <!-- MENU SIDEBAR-->
-       
-            <aside class="menu-sidebar">
-
-                <div class="menu-sidebar__content js-scrollbar1">
-                    <nav class="navbar-sidebar">
-                        <ul class="list-unstyled navbar__list">
-                            <li class="active has-sub">
-                                <a class="js-arrow" href="#">
-                                    <i class="fas fa-tachometer-alt"></i>Member
-                                </a>
-                                <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                    <li>
-
-                                        @Html.ActionLink(linkText: "Register Member", actionName: "create", controllerName: "RegisterMember")
-                                    </li>
-
-
-
-                                    <li>
-                                        @Html.ActionLink(linkText: "Update Member", actionName: "index", controllerName: "RegisterMember")
-                                    </li>
-                                    <li>
-                                        @Html.ActionLink(linkText: "Payment Details", actionName: "Details", controllerName: "RegisterMember", routeValues: new { id = 0 }, htmlAttributes: null)
-
-                                    </li>
-                                    <li>
-                                        <a href="index4.html">Dashboard 4</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="chart.html">
-                                    <i class="fas fa-chart-bar"></i>Renew Member
-                                </a>
-                            </li>
-                            <li>
-                                <a href="table.html">
-                                    <i class="fas fa-table"></i> Member List
-                                </a>
-                            </li>
-
-
-                            <li class="has-sub">
-                                <a class="js-arrow" href="#">
-                                    <i class="fas fa-calendar-alt"></i>Create Event
-                                </a>
-                                <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                    <li>
-                                        <a href="login.html">Create Event</a>
-                                    </li>
-                                    <li>
-                                        <a href="register.html">Update Event</a>
-                                    </li>
-
-                                </ul>
-                            </li>
-
-                        </ul>
-
-                    </nav>
-                </div>
-       
-            </aside>
-       
-        <!-- END MENU SIDEBAR-->
-        <!-- PAGE CONTAINER-->
-      
-            <!-- HEADER DESKTOP-->
-            <!-- MAIN CONTENT-->
-            <div class="main-content">
-                <div class="section__content section__content--p30">
-                  
+        <header class="header-mobile d-block d-lg-none">
+            <div class="header-mobile__bar">
+                <div class="container-fluid">
+                    <div class="header-mobile-inner">
+                        
+                        <button class="hamburger hamburger--slider" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
                 </div>
             </div>
+            <nav class="navbar-mobile">
+                <div class="container-fluid">
+                    <ul class="navbar-mobile__list list-unstyled">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-tachometer-alt"></i>Dashboard
+                            </a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="index.html">Member</a>
+                                    @Html.ActionLink(linkText: "Register Member", actionName: "create", controllerName: "RegisterMember")
+                                   
+                                </li>
+                                <li>
+                                    <a href="index2.html">Update Member</a>
+                                    @Html.ActionLink(linkText: "Update Member", actionName: "Edit", controllerName: "RegisterMember", routeValues: new {id = 0}, htmlAttributes: null )
+                                </li>
+                                <li>
+                                    <a href="index3.html">Payment Details</a>
+                                    @Html.ActionLink(linkText: "Payment Details", actionName: "Details", controllerName: "RegisterMember", routeValues: new { id = 0 }, htmlAttributes: null)
+
+                                </li>
+                                <li>
+                                    <a href="index4.html">Dashboard 4</a>
+                                </li>
+                            </ul>
+                        </li>
+                      
+                        
+                        <li>
+                            <a href="form.html">
+                                <i class="far fa-check-square"></i> Member List
+                            </a>
+                        </li>
+                                              
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-calendar-alt"></i>Events
+                            </a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="button.html">Create</a>
+                                </li>
+                                <li>
+                                    <a href="badge.html">Update</a>
+                                </li>
+                                                               
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- END HEADER MOBILE-->
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li class="active has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-tachometer-alt"></i>Dashboard
+                            </a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    
+                                    @Html.ActionLink(linkText: "Register Member", actionName: "create", controllerName: "RegisterMember")
+                                </li>
+                                <li>
+                                    
+                                    @Html.ActionLink(linkText: "Update Member", actionName: "Edit", controllerName: "RegisterMember", routeValues: new { id = 0 }, htmlAttributes: null)
+                                </li>
+                                <li>
+                                    
+                                    @Html.ActionLink(linkText: "Payment Details", actionName: "Details", controllerName: "RegisterMember", routeValues: new { id = 0 }, htmlAttributes: null)
+
+                                </li>
+                                <li>
+                                    <a href="index4.html">Dashboard 4</a>
+                                </li>
+                            </ul>
+                        </li>
+                                           
+                      
+                        <li>
+                            <a href="form.html">
+                                <i class="far fa-check-square"></i> Member List
+                            </a>
+                        </li>
+
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-calendar-alt"></i>Events
+                            </a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="button.html">Create</a>
+                                </li>
+                                <li>
+                                    <a href="badge.html">Update</a>
+                                </li>
+                              
+
+                            </ul>
+                        </li>
+
+                     </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+        <!-- PAGE CONTAINER-->
+        
+            <!-- HEADER DESKTOP-->
+            <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                           <!--design here-->
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
+    
 
     <!--- Script-->
     <script src="~/Dashboard/jquery-3.2.1.min.js"></script>
-    <script src="~/Dashboard/popper.min.js"></script>
+    @*<script src="~/Dashboard/popper.min.js"></script>*@
     <script src="~/Dashboard/bootstrap.min.js"></script>
-    <script src="~/Dashboard/slick.min.js"></script>
-    <script src="~/Dashboard/wow.min.js"></script>
+    @*<script src="~/Dashboard/slick.min.js"></script>
+    <script src="~/Dashboard/wow.min.js"></script>*@
 
     <script src="~/Dashboard/animsition.min.js"></script>
-    <script src="~/Dashboard/bootstrap-progressbar.min.js"></script>
+    @*<script src="~/Dashboard/bootstrap-progressbar.min.js"></script>
     <script src="~/Dashboard/jquery.waypoints.min.js"></script>
     <script src="~/Dashboard/jquery.counterup.min.js"></script>
     <script src="~/Dashboard/circle-progress.min.js"></script>
     <script src="~/Dashboard/perfect-scrollbar.js"></script>
 
     <script src="~/Dashboard/Chart.bundle.min.js"></script>
-    <script src="~/Dashboard/select2.min.js"></script>
-  
+    <script src="~/Dashboard/select2.min.js"></script>*@
+
     <script src="~/Dashboard/main.js"></script>
 
 </body>
 
 </html>
-<!-- end document-->
-@*---------------------------------------------------------------*@
-
-
-
-
-@*@{
-        ViewBag.Title = "AdminDashboard";
-    }
-
-
-
-    <div class="container-fluid padding">
-
-        <div class="logo text-center">
-
-            <img src="" />
-        </div>
-
-        <h1 class="display-4">Admin DashBoard</h1>
-
-        <div class="panel">
-
-            <div class="panel-body">
-                <div class="col-md-3 dashboard-icon col-sm-3  row text-center">
-
-                   <span class="glyphicon glyphicon-user"></span>
-                    <div>@Html.ActionLink("Register Member", "Register", "Register") </div>
-
-                </div>
-                <div class="col-md-3  dashboard-icon col-sm-3  row text-center">
-                    <span class="glyphicon glyphicon-list"></span>
-                  <div>@Html.ActionLink("Member Listing", "MemberDetails", "Member") </div>
-                </div>
-
-                <div class="col-md-3 dashboard-icon col-sm-3  row text-center">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                   <div>@Html.ActionLink("Renew Member","RenewMember","Renew") </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>*@

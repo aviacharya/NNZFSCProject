@@ -49,8 +49,8 @@ namespace NNZFSC.Controllers
         public ActionResult Details( int id)
         {
             MemberRegistration MemberRegistration = new MemberRegistration();
-            var memberDetails = objRegisterMember.GetMemberById(0);
-            var paymentDetails = objPaymentMember.GetPaymentDetails(0);
+            var memberDetails = objRegisterMember.GetMemberById(3);
+            var paymentDetails = objPaymentMember.GetPaymentDetails(3);
             if (paymentDetails.Count() == 0 && memberDetails.MemberId == 0)
             {
                 return View(memberDetails);

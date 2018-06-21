@@ -64,7 +64,7 @@ textarea:focus {
 }
 
 input, textarea {
-    border: none;
+    
 }
 
 button {
@@ -307,9 +307,9 @@ section {
 }
 
 .main-content {
-    padding-top: 116px;
+    padding-top: 0px;
     min-height: 100vh;
-    padding-left:20%;
+    padding-left:8%;
 }
 
 @media (max-width: 991px) {
@@ -4246,8 +4246,8 @@ section {
 
 .table-earning tbody td {
     color: #808080;
-    padding: 12px 40px;
-    white-space: nowrap;
+    padding: 12px 10px;
+   
 }
 
 .table-earning tbody td.text-right {
