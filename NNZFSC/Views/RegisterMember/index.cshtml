@@ -53,35 +53,48 @@
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard
+                                <i class="fas fa-tachometer-alt"></i>Members
                             </a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 <li>
                                     <a href="index.html">Member</a>
-                                    @Html.ActionLink(linkText: "Register Member", actionName: "create", controllerName: "RegisterMember")
+                                    @Html.ActionLink(linkText: "Register", actionName: "create", controllerName: "RegisterMember")
 
                                 </li>
                                 <li>
                                     <a href="index2.html">Update Member</a>
-                                    @Html.ActionLink(linkText: "Update Member", actionName: "Edit", controllerName: "RegisterMember", routeValues: new { id = 0 }, htmlAttributes: null)
+                                    @Html.ActionLink(linkText: "Update", actionName: "Edit", controllerName: "RegisterMember", routeValues: new { id = 0 }, htmlAttributes: null)
                                 </li>
-                                <li>
-                                    <a href="index3.html">Payment Details</a>
-                                    @Html.ActionLink(linkText: "Payment Details", actionName: "Details", controllerName: "RegisterMember", routeValues: new { id = 0 }, htmlAttributes: null)
-
-                                </li>
-                                <li>
-                                    <a href="index4.html">Dashboard 4</a>
-                                </li>
+                               
+                               
                             </ul>
                         </li>
 
 
                         <li>
                             <a href="form.html">
-                                <i class="far fa-check-square"></i> Member List
+                                <i class="far fa-check-square"></i>View Member
                             </a>
                         </li>
+
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-desktop"></i>Renew
+                            </a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    @Html.ActionLink(linkText: "Create", actionName: "create", controllerName: "Payment", routeValues: new { id = 0 }, htmlAttributes: null)
+                                </li>
+                                <li>
+                                    @*@Html.ActionLink(linkText: "Update", actionName: "Edit", controllerName: "Payment", routeValues: new { id = 0 }, htmlAttributes: null)*@
+                                    @Html.ActionLink(linkText: "Update", actionName: "Details", controllerName: "RegisterMember", routeValues: new { id = 0 }, htmlAttributes: null)
+                                </li>
+
+
+                            </ul>
+                        </li>
+
+
 
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
@@ -111,34 +124,46 @@
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard
+                                <i class="fas fa-tachometer-alt"></i>Members
                             </a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
 
-                                    @Html.ActionLink(linkText: "Register Member", actionName: "create", controllerName: "RegisterMember")
+                                    @Html.ActionLink(linkText: "Register", actionName: "create", controllerName: "RegisterMember")
                                 </li>
                                 <li>
 
-                                    @Html.ActionLink(linkText: "Update Member", actionName: "Edit", controllerName: "RegisterMember", routeValues: new { id = 0 }, htmlAttributes: null)
+                                    @Html.ActionLink(linkText: "Update", actionName: "index", controllerName: "RegisterMember")
                                 </li>
-                                <li>
-
-                                    @Html.ActionLink(linkText: "Payment Details", actionName: "Details", controllerName: "RegisterMember", routeValues: new { id = 0 }, htmlAttributes: null)
-
-                                </li>
-                                <li>
-                                    <a href="index4.html">Dashboard 4</a>
-                                </li>
+                                
+                              
                             </ul>
                         </li>
 
 
                         <li>
                             <a href="form.html">
-                                <i class="far fa-check-square"></i> Member List
+                                <i class="far fa-check-square"></i>View Members
                             </a>
                         </li>
+
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-desktop"></i>Renew
+                            </a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    @Html.ActionLink(linkText: "Create", actionName: "create", controllerName: "Payment", routeValues: new { id = 0 }, htmlAttributes: null)
+                                </li>
+                                <li>
+                                    @*@Html.ActionLink(linkText: "Update", actionName: "Edit", controllerName: "Payment", routeValues: new { id = 0 }, htmlAttributes: null)*@
+                                    @Html.ActionLink(linkText: "Update", actionName: "Details", controllerName: "RegisterMember", routeValues: new { id = 0 }, htmlAttributes: null)
+                                </li>
+
+
+                            </ul>
+                        </li>
+
 
                         <li class="has-sub">
                             <a class="js-arrow" href="#">

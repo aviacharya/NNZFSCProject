@@ -24,7 +24,7 @@ namespace NNZFSC.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult Edit(int id)
         {
             
@@ -32,7 +32,7 @@ namespace NNZFSC.Controllers
             return View(payment);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult Edit(MemberPayment payment)
         {
 
