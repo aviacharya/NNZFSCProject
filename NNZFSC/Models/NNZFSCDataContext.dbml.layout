@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="NNZFSCDataContext">
+  <DataContextMoniker Name="/NNZFSCDataContextDataContext" />
+  <nestedChildShapes>
+    <classShape Id="d815af71-0cc6-4be3-8ed5-ae01b7196f93" absoluteBounds="4.625, 3.125, 2, 3.1170068359375">
+      <DataClassMoniker Name="/NNZFSCDataContextDataContext/AspNetUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a2198404-9d8c-4033-9110-3cdbc745ac60" absoluteBounds="4.64, 3.585, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="16992455-88da-4e53-a5b3-c27b04eeadcd" absoluteBounds="6.875, 1, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/NNZFSCDataContextDataContext/AspNetUserRole" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5aa5ad27-f405-4947-95f8-805e266eb6a0" absoluteBounds="6.89, 1.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.625 : 4.68350341796875); (7.875 : 4.68350341796875); (7.875 : 2.19399251302083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/NNZFSCDataContextDataContext/AspNetUser/AspNetUser_AspNetUserRole" />
+      <nodes>
+        <classShapeMoniker Id="d815af71-0cc6-4be3-8ed5-ae01b7196f93" />
+        <classShapeMoniker Id="16992455-88da-4e53-a5b3-c27b04eeadcd" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="c0354bbd-efbf-47cc-8d0f-b540f7f7f096" absoluteBounds="3.625, 1, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/NNZFSCDataContextDataContext/AspNetRole" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d7fe9287-1ea5-4de6-b539-e570cb21fe25" absoluteBounds="3.64, 1.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.625 : 1.59699625651042); (6.875 : 1.59699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/NNZFSCDataContextDataContext/AspNetRole/AspNetRole_AspNetUserRole" />
+      <nodes>
+        <classShapeMoniker Id="c0354bbd-efbf-47cc-8d0f-b540f7f7f096" />
+        <classShapeMoniker Id="16992455-88da-4e53-a5b3-c27b04eeadcd" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

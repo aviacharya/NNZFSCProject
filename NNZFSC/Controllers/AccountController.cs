@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using NNZFSC.Models;
+using NNZFSC.Repository;
 
 namespace NNZFSC.Controllers
 {
@@ -17,9 +18,11 @@ namespace NNZFSC.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IAccount objAccount;
 
         public AccountController()
         {
+            objAccount = new AccountRepository();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -76,11 +79,22 @@ namespace NNZFSC.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var UserID = GetUserIDByUserName(model.Email);
+            var LoginType = GetRoleByUserID(Convert.ToString(UserID));
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
+
+                    if (LoginType == "admin")
+                    {
+                        return RedirectToAction("AdminDashboard", "Dashboard");
+                    }
+                    else
+                    {
+                        return RedirectToAction("UserDashboard", "Dashboard");
+                    }
+                   
+                  case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
@@ -91,6 +105,19 @@ namespace NNZFSC.Controllers
             }
         }
 
+
+        [NonAction]
+        public string GetUserIDByUserName(string UserName)
+        {
+
+            return UserName = objAccount.GetUserIDByUserName(UserName);
+        }
+        
+
+        public  string GetRoleByUserID(string UserId)
+        {
+            return UserId = objAccount.GetRoleByUserID(UserId);
+        }
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
