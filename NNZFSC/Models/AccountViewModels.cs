@@ -85,7 +85,10 @@ namespace NNZFSC.Models
         [DataType(DataType.Text)]
         [Display(Name = "Full Name")]
         public string UserName { get; set; }
-    }
+
+       }
+
+   
 
     public class ResetPasswordViewModel
     {

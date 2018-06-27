@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using NNZFSC.Models;
 using NNZFSC.Repository;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace NNZFSC.Controllers
 {
@@ -179,6 +180,9 @@ namespace NNZFSC.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                //role store define the type of role store in db
+              //  var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                user.Roles.Add(new IdentityUserRole { UserId = user.Id, RoleId = "2" });
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
