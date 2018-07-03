@@ -16,24 +16,52 @@ namespace NNZFSC.Controllers
         public PaymentController()
         {
             objPayment = new PaymentMember();
-           
+
         }
-        
+
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(MemberPayment MemberPayment)
         {
-            
-            var payment = objPayment.GetMemberPaymentById(id);
-            return View(payment);
+            MemberPayment.PaymentBy = "Avi";
+            if (string.IsNullOrEmpty(MemberPayment.PaymentDate.ToString()))
+                ModelState.AddModelError("Error", "Please enter Payment Date");
+            else if (string.IsNullOrEmpty(MemberPayment.PaymentAmount.ToString()))
+                ModelState.AddModelError("Error", "Please enter Payment Amount");
+            else if (string.IsNullOrEmpty(MemberPayment.PaymentBy.ToString()))
+                ModelState.AddModelError("Error", "Please enter Payment By");
+
+            else
+            { 
+                int payment = objPayment.UpdateMemberPayment(MemberPayment);
+                if (payment > 0)
+
+                {
+
+                    ViewBag.Text = "Payment Updaed Successfully.";
+                }
+
+
+                else
+                {
+                    TempData["Message"] = "Some thing went wrong while Payment Updated .";
+                }
+
+                return RedirectToAction("Edit");
+
+
         }
 
+        
+            return View(MemberPayment);
+    }
+
         [HttpGet]
-        public ActionResult Edit(MemberPayment payment)
+        public ActionResult Edit(int id)
         {
 
             return View();
