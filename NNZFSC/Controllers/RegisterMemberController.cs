@@ -7,6 +7,7 @@ using NNZFSC.Models;
 using NNZFSC.Repository;
 using System.Data;
 
+
 namespace NNZFSC.Controllers
 {
     public class RegisterMemberController : Controller
@@ -49,8 +50,10 @@ namespace NNZFSC.Controllers
         public ActionResult Details( int id)
         {
             MemberRegistration MemberRegistration = new MemberRegistration();
-            var memberDetails = objRegisterMember.GetMemberById(3);
+            
+            var memberDetails = id.GetMemberById(3);
             var paymentDetails = objPaymentMember.GetPaymentDetails(3);
+           
             if (paymentDetails.Count() == 0 && memberDetails.MemberId == 0)
             {
                 return View(memberDetails);
@@ -161,7 +164,7 @@ namespace NNZFSC.Controllers
         public ActionResult Edit(int id)
         {
            
-            var model = objRegisterMember.GetMemberById(id);
+            var model = id.GetMemberById(id);
             return View(model);
         }
 

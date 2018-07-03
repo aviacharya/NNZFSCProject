@@ -19,6 +19,6 @@ namespace NNZFSC.Repository
 
         void DeleteMember(int ? id);
 
-        MemberRegistration GetMemberById(int id);
+     //   MemberRegistration GetMemberById(int id);
     }
 }
