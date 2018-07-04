@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var grid = new WebGrid(Model.MemberPaymentList, canPage: true, rowsPerPage: 5, selectionFieldName: "selectedRow");
+    var grid = new WebGrid(Model.MemberPaymentList, canPage: true, rowsPerPage: 15, selectionFieldName: "selectedRow");
 }
 <link href="~/Content/Gridmvc.css" rel="stylesheet" />
 <script type="text/javascript">
@@ -20,19 +20,21 @@
         $(".edit-mode").change(function () {
             var tr = $(this).parents('tr:first');
             var PaymentDate = tr.find("#PaymentDate").val();
+         
             var PaymentId = tr.find("#PaymentId").text();
-             var date = new Date(PaymentDate);
-             if (date == null || date == "Invalid Date") {
-                 alert("Enter correct format of date : (mm/dd/YY)");
-                 return;
-             }
            
-            var newdate = new Date(date);
-            var dd = newdate.getDate();
-            var mm = newdate.getMonth() + 1;
-            var y = newdate.getFullYear() + 1;
-            var NextPaymentDate = mm + '/' + dd + '/' + y;
-            document.getElementById("NextPaymentDate-" + PaymentId).value = NextPaymentDate;
+            $.ajax({
+                url: '/RegisterMember/GetExpirydate',
+                data: JSON.stringify({ date: PaymentDate }),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                   
+                    document.getElementById("NextPaymentDate-" + PaymentId).value = data;
+                 
+                }
+            });
+
                             
         });
 
@@ -40,16 +42,16 @@
             var tr = $(this).parents('tr:first');
             var PaymentId = tr.find("#PaymentId").text();
             var PaymentDate = tr.find("#PaymentDate").val();
-        //    alert(PaymentDate);
+        
             var NextPaymentDate = tr.find("#NextPaymentDate-" + PaymentId).val();
-         //   alert(PaymentDate);
+         
             var Amount = tr.find("#Amount").val();
           
             tr.find("#lblPaymentDate").text(PaymentDate);
             tr.find("#lblNextPaymentDate").text(NextPaymentDate);
             tr.find("#lblAmount").text(Amount);
             tr.find('.edit-mode, .display-mode').toggle();
-         //   alert(PaymentDate);
+         
             
             var UserModel =
             {
@@ -58,7 +60,7 @@
                 "PaymentAmount": Amount,
                 "NextPaymentDate": NextPaymentDate
             };
-      //      alert(PaymentDate);
+   
             $.ajax({
                 url: '/RegisterMember/UpdateRenewMember',
                 data: JSON.stringify(UserModel),
