@@ -35,5 +35,7 @@ namespace NNZFSC.Models
         public MemberRegistration MemberDetails { get; set; }
 
         public string disable { get; set; }
+
+        public bool IsReadOnly { get; set; }
     }
 }

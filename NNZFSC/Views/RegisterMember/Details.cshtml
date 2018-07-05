@@ -7,52 +7,52 @@
 }
 <link href="~/Content/Gridmvc.css" rel="stylesheet" />
 <script type="text/javascript">
-  
+
     $(function () {
         $('.edit-mode').hide();
         $('.edit-user, .cancel-user').on('click', function () {
             var tr = $(this).parents('tr:first');
             tr.find('.edit-mode, .display-mode').toggle();
-           
+
         });
 
 
         $(".edit-mode").change(function () {
             var tr = $(this).parents('tr:first');
             var PaymentDate = tr.find("#PaymentDate").val();
-         
+
             var PaymentId = tr.find("#PaymentId").text();
-           
+
             $.ajax({
                 url: '/RegisterMember/GetExpirydate',
                 data: JSON.stringify({ date: PaymentDate }),
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                   
+
                     document.getElementById("NextPaymentDate-" + PaymentId).value = data;
-                 
+
                 }
             });
 
-                            
+
         });
 
         $('.save-user').on('click', function () {
             var tr = $(this).parents('tr:first');
             var PaymentId = tr.find("#PaymentId").text();
             var PaymentDate = tr.find("#PaymentDate").val();
-        
+
             var NextPaymentDate = tr.find("#NextPaymentDate-" + PaymentId).val();
-         
+
             var Amount = tr.find("#Amount").val();
-          
+
             tr.find("#lblPaymentDate").text(PaymentDate);
             tr.find("#lblNextPaymentDate").text(NextPaymentDate);
             tr.find("#lblAmount").text(Amount);
             tr.find('.edit-mode, .display-mode').toggle();
-         
-            
+
+
             var UserModel =
             {
                 "PaymentId": PaymentId,
@@ -60,7 +60,7 @@
                 "PaymentAmount": Amount,
                 "NextPaymentDate": NextPaymentDate
             };
-   
+
             $.ajax({
                 url: '/RegisterMember/UpdateRenewMember',
                 data: JSON.stringify(UserModel),
@@ -75,10 +75,10 @@
     })
 
 
-   
 
 
-</script>  
+
+</script>
 
 
 
@@ -97,7 +97,7 @@
 
     <link href="~/Dashboard/animsition.min.css" rel="stylesheet" media="all" />
     @*<link href="~/Dashboard/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all" />
-    <link href="~/Dashboard/animate.css" rel="stylesheet" media="all"/>*@
+        <link href="~/Dashboard/animate.css" rel="stylesheet" media="all"/>*@
     <link href="~/Dashboard/hamburgers.min.css" rel="stylesheet" media="all" />
     @*<link href="~/Dashboard/slick.css" rel="stylesheet" media="all" />
         <link href="~/Dashboard/select2.min.css" rel="stylesheet" media="all" />*@
@@ -141,8 +141,8 @@
                                     <a href="index2.html">Update Member</a>
                                     @Html.ActionLink(linkText: "Update", actionName: "index", controllerName: "RegisterMember")
                                 </li>
-                               
-                               
+
+
                             </ul>
                         </li>
 
@@ -211,8 +211,8 @@
 
                                     @Html.ActionLink(linkText: "Update", actionName: "index", controllerName: "RegisterMember")
                                 </li>
-                               
-                               
+
+
                             </ul>
                         </li>
 
@@ -287,7 +287,14 @@
                                 <br />
                                 <div class="text-center">
                                     @Html.LabelFor(model => model.MemberId, htmlAttributes: new { @class = "control-label col-md-4" })
-                                    @Html.TextBoxFor(model => model.MemberId, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+                                    @if (Model.IsReadOnly == true)
+                                    {
+                                        @Html.TextBoxFor(model => model.MemberId, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBoxFor(model => model.MemberId, new { @class = "form-control", style = "width: 45%; display:inline-block;" })
+                                    }
 
                                 </div>
                                 <br />
@@ -335,10 +342,10 @@
 
                             </div>
                         </div>
-                                <div class="col-md-8">
-                                    <div>  <h5 class="jumbotron" style="padding:2rem">Member Renew Details</h5></div>
-                                    <div id="gridContent" style="padding:20px; margin-top:60px" class="table-responsive table--no-card m-b-30">
-                                        @grid.GetHtml(
+                        <div class="col-md-8">
+                            <div>  <h5 class="jumbotron" style="padding:2rem">Member Renew Details</h5></div>
+                            <div id="gridContent" style="padding:20px; margin-top:60px" class="table-responsive table--no-card m-b-30">
+                                @grid.GetHtml(
         tableStyle: "webgrid-table",
         headerStyle: "webgrid-header",
         footerStyle: "webgrid-footer",
@@ -353,15 +360,15 @@
              grid.Column("PaymentAmount", "Payment Amount", format: @<text> <span class="display-mode"> <label id="lblAmount">@item.PaymentAmount</label> </span>  <input type="text" id="Amount" value="@item.PaymentAmount" class="edit-mode" /> </text>, style: "col2Width"),
              grid.Column("NextPaymentDate", "Expiry Date", format: @<text> <span class="display-mode"> <label id="lblNextPaymentDate">@item._NextPaymentDateToDisplay</label> </span>  <input type="text" id="NextPaymentDate-@item.PaymentId" value="@item._NextPaymentDateToDisplay" class="edit-mode" readonly /> </text>, style: "col2Width"),
              grid.Column("Action", format: @<text>
-                            <button class="edit-user display-mode" @item.disable>Edit</button>
-                            <button class="save-user edit-mode">Save</button>
-                            <button class="cancel-user edit-mode">Cancel</button>
-                        </text>, style: "col3Width", canSort: false)
+                    <button class="edit-user display-mode" @item.disable>Edit</button>
+                    <button class="save-user edit-mode">Save</button>
+                    <button class="cancel-user edit-mode">Cancel</button>
+            </text>, style: "col3Width", canSort: false)
            ))
 
-                                    </div>
+                            </div>
 
-                                </div>
+                        </div>
 
 
                     </div>

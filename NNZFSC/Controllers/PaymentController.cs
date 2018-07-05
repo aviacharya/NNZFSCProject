@@ -72,6 +72,12 @@ namespace NNZFSC.Controllers
         {
 
             var payment = objPayment.GetMemberPaymentById(id);
+            payment.IsReadOnly = true;
+            if(payment.MemberDetails == null)
+            {
+                payment.IsReadOnly = false;
+           
+            }
             return View(payment);
         }
 
@@ -95,7 +101,7 @@ namespace NNZFSC.Controllers
                     ModelState.AddModelError("Error", "Please enter Amount");
                 else
                 {
-                    payment.MemberId = payment.MemberDetails.MemberId;
+                    payment.MemberId = payment.MemberDetails.MemberId.Value;
                     payment.IsRenewal = true;
                     payment.PaymentBy = "Avi";
                     int PaymentId = objPayment.InsertMemberPayment(payment);

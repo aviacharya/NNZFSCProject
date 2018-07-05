@@ -11,7 +11,7 @@ namespace NNZFSC.Models
     {
        
         [Key]
-        public int MemberId { get; set; }
+        public int ? MemberId { get; set; }
 
         [Display(Name = "First Name")]
         [Required (ErrorMessage ="Please enter the first Name")]
@@ -53,6 +53,8 @@ namespace NNZFSC.Models
         public string Gender { get; set; }
 
         public IList<MemberPayment> MemberPaymentList { get; set; }
+
+        public bool IsReadOnly { get; set; }
 
 
     }

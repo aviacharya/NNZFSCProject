@@ -86,7 +86,7 @@
                             </a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 <li>
-                                    @Html.ActionLink(linkText: "Create", actionName: "Payment", controllerName: "Create")
+                                    @Html.ActionLink(linkText: "Create", actionName: "Payment", controllerName: "Create", routeValues: new { id = 0 }, htmlAttributes: null)
                                 </li>
                                 <li>
                                     @Html.ActionLink(linkText: "Update", actionName: "Edit", controllerName: "Payment", routeValues: new { id = 0 }, htmlAttributes: null)
@@ -154,7 +154,7 @@
                             </a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 <li>
-                                    @Html.ActionLink(linkText: "Create", actionName: "create", controllerName: "Payment")
+                                    @Html.ActionLink(linkText: "Create", actionName: "create", controllerName: "Payment" , routeValues: new { id = 0 }, htmlAttributes: null)
                                 </li>
                                 <li>
                                     @Html.ActionLink(linkText: "Update", actionName: "Details", controllerName: "RegisterMember", routeValues: new { id = 0 }, htmlAttributes: null)

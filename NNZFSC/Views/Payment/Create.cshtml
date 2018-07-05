@@ -25,7 +25,7 @@
 
         <link href="~/Dashboard/animsition.min.css" rel="stylesheet" media="all" />
         @*<link href="~/Dashboard/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all" />
-        <link href="~/Dashboard/animate.css" rel="stylesheet" media="all"/>*@
+            <link href="~/Dashboard/animate.css" rel="stylesheet" media="all"/>*@
         <link href="~/Dashboard/hamburgers.min.css" rel="stylesheet" media="all" />
         @*<link href="~/Dashboard/slick.css" rel="stylesheet" media="all" />
             <link href="~/Dashboard/select2.min.css" rel="stylesheet" media="all" />*@
@@ -61,16 +61,16 @@
                                 </a>
                                 <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                     <li>
-                                        
+
                                         @Html.ActionLink(linkText: "Register", actionName: "create", controllerName: "RegisterMember")
 
                                     </li>
                                     <li>
-                                        
+
                                         @Html.ActionLink(linkText: "Update", actionName: "index", controllerName: "RegisterMember")
                                     </li>
-                                    
-                                   
+
+
                                 </ul>
                             </li>
 
@@ -139,8 +139,8 @@
 
                                         @Html.ActionLink(linkText: "Update", actionName: "index", controllerName: "RegisterMember")
                                     </li>
-                                   
-                                   
+
+
                                 </ul>
                             </li>
 
@@ -207,8 +207,12 @@
                                 <br />
                                 <div class="text-center">
                                     @Html.LabelFor(model => model.MemberDetails.MemberId, htmlAttributes: new { @class = "control-label col-md-4" })
-                                    @Html.TextBoxFor(model => model.MemberDetails.MemberId, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
-
+                                    @if (@Model.IsReadOnly == true)
+                                    {
+                                        @Html.TextBoxFor(model => model.MemberDetails.MemberId, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+                                    }
+                                    else
+                                    { @Html.TextBoxFor(model => model.MemberDetails.MemberId, new { @class = "form-control", style = "width: 45%; display:inline-block;" })}
                                 </div>
                                 <br />
                                 <div class="text-center">
@@ -257,9 +261,9 @@
                                 <div style="margin:50px 80px">
                                     @Html.ActionLink(linkText: "Back to List", actionName: "index", controllerName: "RegisterMember")
                                 </div>
-                                                               
+
                             </div>
-                          
+
 
                             <div class="col-md-6">
                                 <br /><br />
