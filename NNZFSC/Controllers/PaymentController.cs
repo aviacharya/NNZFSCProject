@@ -80,6 +80,43 @@ namespace NNZFSC.Controllers
             }
             return View(payment);
         }
+        [HttpPost]
+        public JsonResult GetMemberInfo(int id)
+        {
+
+            var member = id.GetMemberById(id);
+            var MemberDate = member.MembershipDate.Value.ToShortDateString();
+            var MemberExpriyDate = member.MembershipExpiryDate.Value.ToShortDateString();
+           
+            member._MembershipDate = MemberDate;
+            member._MembershipExpiryDate = MemberExpriyDate;
+
+            var paymentDetails = objPayment.GetPaymentDetails(id);
+
+            int maxId = paymentDetails.Max(x => x.PaymentId);
+
+            foreach (var item in paymentDetails)
+            {
+                if (item.PaymentId == maxId) { item.disable = "enabled"; }
+                member.MemberPaymentList.Add(new MemberPayment
+                {
+                    MemberId = item.MemberId,
+                    PaymentId = item.PaymentId,
+                    PaymentAmount = item.PaymentAmount,
+                    PaymentDate = item.PaymentDate,
+                    NextPaymentDate = item.NextPaymentDate,
+                    _NextPaymentDateToDisplay = item._NextPaymentDateToDisplay,
+                    _PaymentDateToDisplay = item._PaymentDateToDisplay,
+                    disable = item.disable
+
+                });
+
+            }
+
+
+            return Json(member, JsonRequestBehavior.AllowGet);
+        }
+
 
         /// <summary>
         /// 

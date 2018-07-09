@@ -38,9 +38,13 @@ namespace NNZFSC.Models
         [Required(ErrorMessage = "Please enter the Membership Date")]
         public DateTime ? MembershipDate { get; set; }
 
+        public string _MembershipDate { get; set; }
+
         [Display(Name = "Membership Expiry")]
         [Required(ErrorMessage = "Please enter the Membership Date")]
         public DateTime ? MembershipExpiryDate { get; set; }
+
+        public string _MembershipExpiryDate { get; set; }
 
         public string  MemberImageName { get; set; }
 
