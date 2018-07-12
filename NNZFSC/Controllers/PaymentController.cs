@@ -85,39 +85,49 @@ namespace NNZFSC.Controllers
         [HttpPost]
         public JsonResult GetMemberInfo(int id)
         {
-
-            var member = id.GetMemberById(id);
-            var MemberDate = member.MembershipDate.Value.ToShortDateString();
-            var MemberExpriyDate = member.MembershipExpiryDate.Value.ToShortDateString();
-           
-            member._MembershipDate = MemberDate;
-            member._MembershipExpiryDate = MemberExpriyDate;
-
-            var paymentDetails = objPayment.GetPaymentDetails(id);
-            
-
-            int maxId = paymentDetails.Max(x => x.PaymentId);
-
-            foreach (var item in paymentDetails)
+            try
             {
-                if (item.PaymentId == maxId) { item.disable = "enabled"; }
-                member.MemberPaymentList.Add(new MemberPayment
+
+                var member = id.GetMemberById(id);
+                if (member.MemberId != null || member.MemberId !=0)
                 {
-                    MemberId = item.MemberId,
-                    PaymentId = item.PaymentId,
-                    PaymentAmount = item.PaymentAmount,
-                    PaymentDate = item.PaymentDate,
-                    NextPaymentDate = item.NextPaymentDate,
-                    _NextPaymentDateToDisplay = item._NextPaymentDateToDisplay,
-                    _PaymentDateToDisplay = item._PaymentDateToDisplay,
-                    disable = item.disable
+                    var MemberDate = member.MembershipDate.Value.ToShortDateString();
+                    var MemberExpriyDate = member.MembershipExpiryDate.Value.ToShortDateString();
 
-                });
+                    member._MembershipDate = MemberDate;
+                    member._MembershipExpiryDate = MemberExpriyDate;
 
+                    var paymentDetails = objPayment.GetPaymentDetails(id);
+
+
+                    int maxId = paymentDetails.Max(x => x.PaymentId);
+
+                    foreach (var item in paymentDetails)
+                    {
+                        if (item.PaymentId == maxId) { item.disable = "enabled"; }
+                        member.MemberPaymentList.Add(new MemberPayment
+                        {
+                            MemberId = item.MemberId,
+                            PaymentId = item.PaymentId,
+                            PaymentAmount = item.PaymentAmount,
+                            PaymentDate = item.PaymentDate,
+                            NextPaymentDate = item.NextPaymentDate,
+                            _NextPaymentDateToDisplay = item._NextPaymentDateToDisplay,
+                            _PaymentDateToDisplay = item._PaymentDateToDisplay,
+                            disable = item.disable
+
+                        });
+
+                    }
+                }
+
+                return Json(member, JsonRequestBehavior.AllowGet);
             }
-           
 
-            return Json(member, JsonRequestBehavior.AllowGet);
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
 
@@ -142,7 +152,7 @@ namespace NNZFSC.Controllers
                 else
                 {
                     payment.MemberId = payment.MemberDetails.MemberId.Value;
-                    payment.IsRenewal = true;
+                    payment.IsRenewal = "Y";
                     payment.PaymentBy = "Avi";
                     int PaymentId = objPayment.InsertMemberPayment(payment);
                     if (PaymentId > 0)

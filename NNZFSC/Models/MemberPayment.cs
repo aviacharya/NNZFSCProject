@@ -30,7 +30,7 @@ namespace NNZFSC.Models
         [Display(Name = "Amount")]
         public int ? PaymentAmount { get; set; }
 
-        public bool IsRenewal { get; set; }
+        public string IsRenewal { get; set; }
 
         public MemberRegistration MemberDetails { get; set; }
 

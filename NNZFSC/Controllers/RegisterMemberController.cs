@@ -155,7 +155,7 @@ namespace NNZFSC.Controllers
                 ObjMemberPayment.NextPaymentDate = ObjMember.MembershipExpiryDate;
                 ObjMemberPayment.PaymentAmount = ObjMember.MembershipAmount;
                 ObjMemberPayment.PaymentBy = "Avi";
-                ObjMemberPayment.IsRenewal = false;
+                ObjMemberPayment.IsRenewal = "N";
                 int paymentid = objPaymentMember.InsertMemberPayment(ObjMemberPayment);
                 return paymentid;
             }
@@ -243,7 +243,7 @@ namespace NNZFSC.Controllers
         {
             try
             {
-                payment.IsRenewal = true;
+                payment.IsRenewal = "Y";
                 payment.PaymentBy = "Avi";
                 int PaymentId = objPaymentMember.UpdateMemberPayment(payment);
                 if (PaymentId > 0)
