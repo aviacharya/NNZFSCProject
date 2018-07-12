@@ -23,6 +23,7 @@
                     contentType: 'application/json',
                     success: function (data) {
 
+                        $("#MemberId").val(data.MemberId);
                         $("#MemFname").val(data.MemberFirstName);
                         $("#MemMname").val(data.MemberMiddleName);
                         $("#MemLname").val(data.MemberLastName);
@@ -326,6 +327,9 @@
                                     @Html.ValidationMessageFor(model => model.PaymentAmount, "", new { @class = "text-danger" })
 
                                 </div>
+
+                                @Html.ActionLink(linkText: "Update Payment", actionName: "Details", controllerName: "RegisterMember", routeValues: new { id = Model.MemberDetails.MemberId }, htmlAttributes: null)
+
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-4">
                                         <input type="submit" value="Save" class="btn btn-success" />

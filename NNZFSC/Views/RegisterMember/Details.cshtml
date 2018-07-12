@@ -6,6 +6,28 @@
     var grid = new WebGrid(Model.MemberPaymentList, canPage: true, rowsPerPage: 15, selectionFieldName: "selectedRow");
 }
 <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+
+<script type="text/javascript">
+
+
+            $("#MemberId").change(function () {
+
+                var MemberId = this.value;
+                var host = window.location.hostname;
+                var port = location.port;
+
+                var url = "http://" + host + ":" + port + "/RegisterMember/Details/" + MemberId;
+               
+                alert(url);
+                window.location.href = url;
+           
+            });
+
+
+</script>
+
+
+
 <script type="text/javascript">
 
     $(function () {
@@ -267,7 +289,7 @@
         <!-- PAGE CONTAINER-->
         <!-- HEADER DESKTOP-->
         <!-- MAIN CONTENT-->
-        <div class="main-content">
+        <div class="main-content" id="test">
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
                     <div class="row">
@@ -287,50 +309,48 @@
                                 <br />
                                 <div class="text-center">
                                     @Html.LabelFor(model => model.MemberId, htmlAttributes: new { @class = "control-label col-md-4" })
-                                    @if (Model.IsReadOnly == true)
+                                    @if (@Model.IsReadOnly == true)
                                     {
-                                        @Html.TextBoxFor(model => model.MemberId, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+                                        @Html.TextBoxFor(model => model.MemberId, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;", @id = "MemberId" })
                                     }
                                     else
-                                    {
-                                        @Html.TextBoxFor(model => model.MemberId, new { @class = "form-control", style = "width: 45%; display:inline-block;" })
-                                    }
+                                    { @Html.TextBoxFor(model => model.MemberId, new { @class = "form-control", style = "width: 45%; display:inline-block;", @id = "MemberId" })}
 
                                 </div>
                                 <br />
                                 <div class="text-center">
                                     @Html.LabelFor(model => model.MemberFirstName, htmlAttributes: new { @class = "control-label col-md-4" })
-                                    @Html.TextBoxFor(model => model.MemberFirstName, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+                                    @Html.TextBoxFor(model => model.MemberFirstName, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;", @id = "MemFname" })
 
                                 </div>
                                 <br />
                                 <div class="text-center">
                                     @Html.LabelFor(model => model.MemberMiddleName, htmlAttributes: new { @class = "control-label col-md-4" })
-                                    @Html.TextBoxFor(model => model.MemberMiddleName, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+                                    @Html.TextBoxFor(model => model.MemberMiddleName, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;", @id = "MemMname" })
 
                                 </div>
                                 <br />
                                 <div class="text-center">
                                     @Html.LabelFor(model => model.MemberLastName, htmlAttributes: new { @class = "control-label col-md-4" })
-                                    @Html.TextBoxFor(model => model.MemberLastName, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+                                    @Html.TextBoxFor(model => model.MemberLastName, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;", @id = "MemLname" })
 
                                 </div>
                                 <br />
                                 <div class="text-center">
                                     @Html.LabelFor(model => model.MemberAddress, htmlAttributes: new { @class = "control-label col-md-4" })
-                                    @Html.TextBoxFor(model => model.MemberAddress, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+                                    @Html.TextBoxFor(model => model.MemberAddress, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;", @id = "MemAddress" })
 
                                 </div>
                                 <br />
                                 <div class="text-center">
                                     @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-4" })
-                                    @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+                                    @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;", @id = "MemEmalAddress" })
 
                                 </div>
                                 <br />
                                 <div class="text-center">
                                     @Html.LabelFor(model => model.MembershipDate, htmlAttributes: new { @class = "control-label col-md-4" })
-                                    @Html.TextBoxFor(model => model.MembershipDate, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;" })
+                                    @Html.TextBoxFor(model => model.MembershipDate, new { @class = "form-control", @readonly = true, style = "width: 45%; display:inline-block;", @id = "MemDate" })
 
                                 </div>
 

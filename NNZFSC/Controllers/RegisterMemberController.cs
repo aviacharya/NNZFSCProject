@@ -51,10 +51,16 @@ namespace NNZFSC.Controllers
         {
             MemberRegistration MemberRegistration = new MemberRegistration();
             
-            var memberDetails = id.GetMemberById(3);
-            var paymentDetails = objPaymentMember.GetPaymentDetails(3);
+            var memberDetails = id.GetMemberById(id);
+            var paymentDetails = objPaymentMember.GetPaymentDetails(id);
+            memberDetails.IsReadOnly = true;
+            //TO display Memberdetails from dashboard
+            if(memberDetails == null || memberDetails.MemberId ==null)
+            {
+                memberDetails.IsReadOnly = false;
+            }
            
-            if (paymentDetails.Count() == 0 && memberDetails.MemberId == 0)
+            if (paymentDetails.Count() == 0 && memberDetails.MemberId == null)
             {
                 return View(memberDetails);
 
@@ -216,6 +222,22 @@ namespace NNZFSC.Controllers
             string ExpiryDate = date.AddYears(1).ToShortDateString();
             return Json(ExpiryDate, JsonRequestBehavior.AllowGet);
         }
+
+
+        [HttpPost]
+        public JsonResult GetMemberInfo(int id)
+        {
+
+            var member = id.GetMemberById(id);
+            var MemberDate = member.MembershipDate.Value.ToShortDateString();
+            var MemberExpriyDate = member.MembershipExpiryDate.Value.ToShortDateString();
+
+            member._MembershipDate = MemberDate;
+            member._MembershipExpiryDate = MemberExpriyDate;
+
+            return Json(member, JsonRequestBehavior.AllowGet);
+        }
+
 
         public JsonResult UpdateRenewMember(MemberPayment payment)
         {

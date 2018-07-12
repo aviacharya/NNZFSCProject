@@ -75,6 +75,8 @@ namespace NNZFSC.Controllers
             payment.IsReadOnly = true;
             if(payment.MemberDetails == null)
             {
+                payment.MemberDetails = new MemberRegistration();
+                payment.MemberDetails.MemberId = 0;
                 payment.IsReadOnly = false;
            
             }
@@ -92,6 +94,7 @@ namespace NNZFSC.Controllers
             member._MembershipExpiryDate = MemberExpriyDate;
 
             var paymentDetails = objPayment.GetPaymentDetails(id);
+            
 
             int maxId = paymentDetails.Max(x => x.PaymentId);
 
@@ -112,7 +115,7 @@ namespace NNZFSC.Controllers
                 });
 
             }
-
+           
 
             return Json(member, JsonRequestBehavior.AllowGet);
         }
