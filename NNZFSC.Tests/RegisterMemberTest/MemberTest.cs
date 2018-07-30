@@ -89,13 +89,13 @@ namespace NNZFSC.Tests.RegisterMemberTest
         }
 
         [TestMethod]
-        public void UpdateMember()
+        public void UpdateMember(int id)
         {
 
             try
             {
 
-                var member = obj.GetMemberById(1);
+                var member = id.GetMemberById(1);
                 string OriginalLastName = member.MemberLastName;
                 member.MemberLastName = "Rai";
                 member.MembershipAmount = 30;
