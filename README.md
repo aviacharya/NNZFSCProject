@@ -3,5 +3,6 @@ I have design the database table and its relationship and also design UI . The w
 Admin can Register their member, Update the member payment and create the Events. But the normal user can see their member status 
 and can see list of members and Community activities.
 
-Admin UserName : aviacharya2002@gmail.com
+Login as Admin
+UserName : aviacharya2002@gmail.com
 Password : Dharan#123
